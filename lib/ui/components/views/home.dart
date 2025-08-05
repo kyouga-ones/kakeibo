@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
                     color: Colors.blue,
                   ),
                   HomeCard(
-                    title: '今月の収入',
+                    title: '総資産',
                     value: 145900,
                     icon: Icons.account_balance_wallet,
                     color: Colors.purple,
