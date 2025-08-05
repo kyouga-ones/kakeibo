@@ -13,10 +13,8 @@ class BalanceCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Gap(4),
             Row(
               children: [
-                Gap(4),
                 Text(
                   "口座残高",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -30,18 +28,21 @@ class BalanceCard extends StatelessWidget {
               value: 0,
               tag: "cash",
             ),
+            Gap(4),
             BalanceData(
               color: Colors.blue,
               title: "メイン口座",
               value: 200000,
               tag: "bank",
             ),
+            Gap(4),
             BalanceData(
               color: Colors.red,
               title: "クレジットカード",
               value: -54100,
               tag: "credit",
             ),
+            Gap(4),
             BalanceData(
               color: Colors.purple,
               title: "投資口座",
