@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:kakeibo/ui/components/cards/balance_card.dart';
 import 'package:kakeibo/ui/components/cards/home_card.dart';
 import 'package:kakeibo/ui/components/cards/recent_transaction_card.dart';
@@ -15,7 +16,7 @@ class Home extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              height: 330,
+              height: 300,
               width: 500,
               child: GridView.count(
                 physics: NeverScrollableScrollPhysics(),
@@ -49,7 +50,9 @@ class Home extends StatelessWidget {
                 ],
               ),
             ),
+            Gap(8),
             BalanceCard(),
+            Gap(8),
             RecentTransactionCard(),
           ],
         ),
