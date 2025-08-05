@@ -1,0 +1,23 @@
+name: "Install Flutter Dependencies"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  install-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+
+      - name: "Setup Flutter"
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.32.8"
+          cache: true
+
+      - name: "Build APK"
+        run: flutter build apk --debug
