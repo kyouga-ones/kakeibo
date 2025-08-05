@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HomeCard extends StatelessWidget {
   final String title;
@@ -16,21 +17,35 @@ class HomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatter = NumberFormat("#,###");
+    var result = formatter.format(value);
+    var amount = "¥ $result";
+
     return Card(
       color: color,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(icon, color: Colors.white),
-                Text(title, style: TextStyle(color: Colors.white)),
-              ],
-            ),
+          Row(
+            children: [
+              SizedBox(width: 20),
+              Icon(icon, color: Colors.white),
+              Text(title, style: TextStyle(color: Colors.white, fontSize: 16)),
+            ],
           ),
-          Text(value.toString(), style: TextStyle(color: Colors.white)),
+          Row(
+            children: [
+              SizedBox(width: 20),
+              Text(
+                amount,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
