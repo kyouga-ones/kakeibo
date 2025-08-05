@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kakeibo/ui/components/views/homeScreen.dart';
+import 'package:kakeibo/ui/components/views/home_screen.dart';
 
 class HomeViewModel extends StatefulWidget {
   const HomeViewModel({super.key});
