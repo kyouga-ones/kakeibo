@@ -1,62 +1,75 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class SearchCard extends StatelessWidget {
-  final String category;
-  final DateTime date;
-  final String paymentCategory;
-  final int value;
+  final List<String> mainCategoryList;
+  final String? selectedMainCategory;
+  final void Function(String?) onMainCategoryChanged;
+  final Map<String, List<String>> subCategoryMap;
+  final String? selectedSubCategory;
+  final void Function(String?) onSubCategoryChanged;
+  final List<String> sortList;
+  final String? selectedSort;
+  final void Function(String?) onSortChanged;
 
   const SearchCard({
     super.key,
-    required this.category,
-    required this.date,
-    required this.paymentCategory,
-    required this.value,
+    required this.mainCategoryList,
+    this.selectedMainCategory,
+    required this.onMainCategoryChanged,
+    required this.subCategoryMap,
+    this.selectedSubCategory,
+    required this.onSubCategoryChanged,
+    required this.sortList,
+    this.selectedSort,
+    required this.onSortChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    final formatter = DateFormat('yy-MM-dd');
-
-    var dateOnly = DateTime(date.year, date.month, date.day);
-    var strDate = formatter.format(dateOnly);
-
-    final numberFormatter = NumberFormat("#,###");
-    var result = numberFormatter.format(value);
-    var amount = "¥ $result";
-
     return Card(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'テキストフィールド',
+              ),
+            ),
+            GridView.count(
+              shrinkWrap: true,
+              crossAxisCount: 2,
+              childAspectRatio: 2.5,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Chip(
-                      label: Text(category),
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      labelPadding: EdgeInsets.symmetric(horizontal: 1),
-                      visualDensity: VisualDensity(
-                        horizontal: 0.0,
-                        vertical: -4,
-                      ),
-                    ),
-                    Text('$strDate・$paymentCategory'),
-                  ],
+                DropdownButton(
+                  items: mainCategoryList.map((value) {
+                    return DropdownMenuItem(value: value, child: Text(value));
+                  }).toList(),
+                  onChanged: onMainCategoryChanged,
+                  value: selectedMainCategory,
                 ),
-                Spacer(),
-                Text(
-                  amount,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: (value >= 0) ? Colors.green : Colors.red,
-                  ),
+                DropdownButton(
+                  items: subCategoryMap[selectedMainCategory]!.map((
+                    String value,
+                  ) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: onSubCategoryChanged,
+                  value: selectedSubCategory,
+                ),
+                DropdownButton(
+                  items: sortList.map((value) {
+                    return DropdownMenuItem(value: value, child: Text(value));
+                  }).toList(),
+                  onChanged: onSortChanged,
+                  value: selectedSort,
                 ),
               ],
             ),
