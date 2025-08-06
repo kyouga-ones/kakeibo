@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/ui/components/views/history_screen.dart';
+import 'package:kakeibo/ui/models/transaction_model.dart';
 
 class HistoryViewmodel extends StatefulWidget {
   const HistoryViewmodel({super.key});
@@ -63,6 +64,32 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
     selectedSort = sortList[0];
   }
 
+  final List<TransactionModel> transactionModelList = [
+    TransactionModel(
+      categoryType: 1,
+      category: 1,
+      date: DateTime.now(),
+      paymentCategory: 1,
+      value: 4000,
+    ),
+    TransactionModel(
+      categoryType: 2,
+      category: 1,
+      date: DateTime.now(),
+      paymentCategory: 2,
+      value: 1000,
+    ),
+    TransactionModel(
+      categoryType: 1,
+      category: 3,
+      date: DateTime.now(),
+      paymentCategory: 3,
+      value: 100000,
+    ),
+  ];
+  void onEditPuressed() {}
+  void onDeletePuressed() {}
+
   @override
   Widget build(BuildContext context) {
     final List<String> availableSubCategories =
@@ -82,6 +109,9 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
       sortList: sortList,
       selectedSort: selectedSort,
       onSortChanged: onSortChanged,
+      transactionModelList: transactionModelList,
+      onEditPuressed: onEditPuressed,
+      onDeletePuressed: onDeletePuressed,
     );
   }
 }
