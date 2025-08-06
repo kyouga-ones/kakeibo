@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:kakeibo/ui/components/rows/balance_row.dart';
+import 'package:kakeibo/features/home/widget/balance_row.dart';
 
 class BalanceCard extends StatelessWidget {
   const BalanceCard({super.key});

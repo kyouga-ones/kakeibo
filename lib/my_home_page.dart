@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kakeibo/ui/components/viewmodels/history_viewmodel.dart';
-import 'package:kakeibo/ui/components/viewmodels/home_view_model.dart';
-import 'package:kakeibo/ui/models/screen.dart';
+import 'package:kakeibo/core/models/screen.dart';
+import 'package:kakeibo/features/history/viewmodel/history_viewmodel.dart';
+import 'package:kakeibo/features/home/viewmodel/home_view_model.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});

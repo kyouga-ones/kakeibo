@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kakeibo/ui/components/cards/history_card.dart';
-import 'package:kakeibo/ui/models/transaction_model.dart';
-import 'package:kakeibo/utils/get_category.dart';
-import 'package:kakeibo/utils/get_payment_category.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
+import 'package:kakeibo/core/utils/get_category.dart';
+import 'package:kakeibo/core/utils/get_payment_category.dart';
+import 'package:kakeibo/features/history/widget/history_card.dart';
 
 class HistoryListview extends StatelessWidget {
   final List<TransactionModel> transactionModelList;

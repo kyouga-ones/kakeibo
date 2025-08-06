@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:kakeibo/ui/components/cards/balance_card.dart';
-import 'package:kakeibo/ui/components/cards/home_card.dart';
-import 'package:kakeibo/ui/components/cards/recent_transaction_card.dart';
+import 'package:kakeibo/features/home/widget/balance_card.dart';
+import 'package:kakeibo/features/home/widget/home_card.dart';
+import 'package:kakeibo/features/home/widget/recent_transaction_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
