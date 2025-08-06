@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
-class BalanceData extends StatelessWidget {
+class BalanceRow extends StatelessWidget {
   final Color color;
   final String title;
   final int value;
   final String tag;
 
-  const BalanceData({
+  const BalanceRow({
     super.key,
     required this.color,
     required this.title,

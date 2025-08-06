@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kakeibo/ui/components/viewmodels/history_viewmodel.dart';
 import 'package:kakeibo/ui/components/viewmodels/home_view_model.dart';
 import 'package:kakeibo/ui/models/screen.dart';
 
@@ -23,10 +24,10 @@ class _MyHomePageState extends State<MyHomePage> {
         screen: HomeViewModel(),
       ),
       Screen(
-        title: 'ホーム',
-        icon: const Icon(Icons.home_outlined),
-        selectedIcon: const Icon(Icons.home),
-        screen: HomeViewModel(),
+        title: '履歴',
+        icon: const Icon(Icons.toc),
+        selectedIcon: const Icon(Icons.toc),
+        screen: HistoryViewmodel(),
       ),
     ];
 

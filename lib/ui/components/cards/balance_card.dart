@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:kakeibo/ui/components/rows/balance_data.dart';
+import 'package:kakeibo/ui/components/rows/balance_row.dart';
 
 class BalanceCard extends StatelessWidget {
   const BalanceCard({super.key});
@@ -22,30 +22,25 @@ class BalanceCard extends StatelessWidget {
               ],
             ),
             Gap(20),
-            BalanceData(
-              color: Colors.green,
-              title: "現金",
-              value: 0,
-              tag: "cash",
-            ),
+            BalanceRow(color: Colors.green, title: "現金", value: 0, tag: "cash"),
             Gap(4),
-            BalanceData(
+            BalanceRow(
               color: Colors.blue,
               title: "メイン口座",
               value: 200000,
               tag: "bank",
             ),
             Gap(4),
-            BalanceData(
+            BalanceRow(
               color: Colors.red,
               title: "クレジットカード",
               value: -54100,
               tag: "credit",
             ),
             Gap(4),
-            BalanceData(
+            BalanceRow(
               color: Colors.purple,
-              title: "投資口座",
+              title: "証券口座",
               value: 0,
               tag: "inverstment",
             ),
