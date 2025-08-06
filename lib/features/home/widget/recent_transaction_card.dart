@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:kakeibo/ui/components/cards/transaction_card.dart';
+import 'package:kakeibo/features/home/widget/transaction_card.dart';
 
 class RecentTransactionCard extends StatelessWidget {
   const RecentTransactionCard({super.key});

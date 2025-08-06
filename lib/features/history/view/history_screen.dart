@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kakeibo/ui/components/cards/search_card.dart';
-import 'package:kakeibo/ui/components/list_view/history_list_view.dart';
-import 'package:kakeibo/ui/models/transaction_model.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
+import 'package:kakeibo/features/history/widget/history_list_view.dart';
+import 'package:kakeibo/features/history/widget/search_card.dart';
 
 class HistoryScreen extends StatelessWidget {
   final List<String> mainCategoryList;

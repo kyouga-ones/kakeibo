@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kakeibo/ui/my_home_page.dart';
+import 'package:kakeibo/my_home_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

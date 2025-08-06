@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kakeibo/ui/components/views/history_screen.dart';
-import 'package:kakeibo/ui/models/transaction_model.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
+import 'package:kakeibo/features/history/view/history_screen.dart';
 
 class HistoryViewmodel extends StatefulWidget {
   const HistoryViewmodel({super.key});
@@ -17,13 +17,7 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
     setState(() {});
   }
 
-  final List<String> incomeCategoryList = [
-    '給与',
-    'ボーナス',
-    '副業',
-    '証券',
-    'その他収入',
-  ];
+  final List<String> incomeCategoryList = ['給与', 'ボーナス', '副業', '証券', 'その他収入'];
 
   final List<String> expenditureCategoryList = [
     '食費',
