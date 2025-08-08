@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kakeibo/core/constants/list.dart';
 import 'package:kakeibo/features/add/view/add_screen.dart';
 
 class AddViewModel extends StatefulWidget {
@@ -30,21 +31,6 @@ class _AddViewModelState extends State<AddViewModel> {
   void onAmountChanged(String value) {
     amountValue = value;
   }
-
-  final List<String> incomeCategoryList = ['給与', 'ボーナス', '副業', '証券', 'その他収入'];
-
-  final List<String> expenditureCategoryList = [
-    '食費',
-    '住居費',
-    '交通費',
-    '光熱費',
-    '通信費',
-    '医療費',
-    '教育費',
-    '娯楽費',
-    '衣類費',
-    'その他支出',
-  ];
 
   var selectedSubCategoryIndex = 0;
   void onSubCategorySelected(bool isSelected, int index) {

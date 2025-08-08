@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kakeibo/core/constants/list.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/history/view/history_screen.dart';
 
@@ -16,21 +17,6 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
     selectedMainCategory = value;
     setState(() {});
   }
-
-  final List<String> incomeCategoryList = ['給与', 'ボーナス', '副業', '証券', 'その他収入'];
-
-  final List<String> expenditureCategoryList = [
-    '食費',
-    '住居費',
-    '交通費',
-    '光熱費',
-    '通信費',
-    '医療費',
-    '教育費',
-    '娯楽費',
-    '衣類費',
-    'その他支出',
-  ];
 
   String? selectedSubCategory = 'すべて';
   void onSubCategoryChanged(String? value) {
