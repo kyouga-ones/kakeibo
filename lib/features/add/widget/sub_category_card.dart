@@ -36,26 +36,19 @@ class SubCategoryCard extends StatelessWidget {
           Gap(8),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GridView.count(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              crossAxisCount: 2,
-              childAspectRatio: 4.5 / 1,
-              children: subCategoryList.asMap().entries.map((category) {
-                return Padding(
-                  padding: const EdgeInsets.all(2.0),
+            child: Wrap(
+              spacing: 8.0,
+              children: subCategoryList.asMap().entries.map((entry) {
+                final index = entry.key;
+                final label = entry.value;
+
+                return SizedBox(
+                  width: MediaQuery.of(context).size.width / 2 - 24,
                   child: ChoiceChip(
-                    label: Center(
-                      child: Text(category.value),
-                    ),
-                    labelPadding: EdgeInsets.zero,
-                    visualDensity: VisualDensity(
-                      horizontal: 0,
-                      vertical: -2,
-                    ),
-                    selected: selectedIndex == category.key,
+                    label: Center(child: Text(label)),
+                    selected: selectedIndex == index,
                     onSelected: (bool selected) {
-                      onSelected(selected, category.key);
+                      onSelected(selected, index);
                     },
                   ),
                 );
