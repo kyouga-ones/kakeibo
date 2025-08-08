@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kakeibo/features/add/widget/account_card.dart';
 import 'package:kakeibo/features/add/widget/amount_card.dart';
+import 'package:kakeibo/features/add/widget/date_card.dart';
 import 'package:kakeibo/features/add/widget/main_category_card.dart';
 import 'package:kakeibo/features/add/widget/sub_category_card.dart';
 
@@ -12,6 +14,11 @@ class AddScreen extends StatelessWidget {
   final List<String> subCategoryList;
   final int selectedSubCategoryIndex;
   final void Function(bool, int) onSubCategorySelected;
+  final String selectedAccount;
+  final List<String> accountList;
+  final void Function(String?) onAccountChanged;
+  final TextEditingController textEditingController;
+  final void Function() onSelectDatePressed;
 
   const AddScreen({
     super.key,
@@ -23,33 +30,55 @@ class AddScreen extends StatelessWidget {
     required this.subCategoryList,
     required this.selectedSubCategoryIndex,
     required this.onSubCategorySelected,
+    required this.selectedAccount,
+    required this.accountList,
+    required this.onAccountChanged,
+    required this.textEditingController,
+    required this.onSelectDatePressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('新しい取引を追加'),
-      ),
+      appBar: AppBar(title: Text('新しい取引を追加')),
       body: Form(
         key: formKey,
-        child: Column(
-          children: [
-            MainCategoryCard(
-              selectedIndex: selectedMainCategoryIndex,
-              onIncomeSelected: onIncomeSelected,
-              onExpenditureSelected: onExpenditureSelected,
-            ),
-            AmountCard(
-              onChanged: onAmountChanged,
-            ),
-            SubCategoryCard(
-              selectedMainCategoryIndex: selectedMainCategoryIndex,
-              subCategoryList: subCategoryList,
-              selectedIndex: selectedSubCategoryIndex,
-              onSelected: onSubCategorySelected,
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              MainCategoryCard(
+                selectedIndex: selectedMainCategoryIndex,
+                onIncomeSelected: onIncomeSelected,
+                onExpenditureSelected: onExpenditureSelected,
+              ),
+              AmountCard(
+                onChanged: onAmountChanged,
+              ),
+              SubCategoryCard(
+                selectedMainCategoryIndex: selectedMainCategoryIndex,
+                subCategoryList: subCategoryList,
+                selectedIndex: selectedSubCategoryIndex,
+                onSelected: onSubCategorySelected,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: AccountCard(
+                      selectedAccount: selectedAccount,
+                      accountList: accountList,
+                      onChanged: onAccountChanged,
+                    ),
+                  ),
+                  Expanded(
+                    child: DateCard(
+                      controller: textEditingController,
+                      onPressed: onSelectDatePressed,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -12,3 +12,5 @@ const List<String> expenditureCategoryList = [
   '衣類費',
   'その他支出',
 ];
+
+const List<String> accountList = ['現金', 'メイン口座', 'クレジットカード', '証券口座'];
