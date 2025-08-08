@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/models/screen.dart';
+import 'package:kakeibo/features/add/viewmodel/add_view_model.dart';
 import 'package:kakeibo/features/history/viewmodel/history_viewmodel.dart';
 import 'package:kakeibo/features/home/viewmodel/home_view_model.dart';
 
@@ -32,7 +33,22 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     return Scaffold(
-      appBar: AppBar(title: Text(screens[screenIndex].title)),
+      appBar: AppBar(
+        title: Text(screens[screenIndex].title),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AddViewModel(),
+                ),
+              );
+            },
+            icon: Icon(Icons.add),
+          ),
+        ],
+      ),
       body: Center(child: screens[screenIndex].screen),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
