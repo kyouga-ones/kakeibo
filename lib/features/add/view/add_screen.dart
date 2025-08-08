@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/features/add/widget/account_card.dart';
+import 'package:kakeibo/features/add/widget/add_button.dart';
 import 'package:kakeibo/features/add/widget/amount_card.dart';
 import 'package:kakeibo/features/add/widget/date_card.dart';
 import 'package:kakeibo/features/add/widget/main_category_card.dart';
@@ -22,6 +23,7 @@ class AddScreen extends StatelessWidget {
   final void Function() onSelectDatePressed;
   final TextEditingController transactionTextEditingController;
   final String? Function(String?) transactionValidator;
+  final void Function() onAddPressed;
 
   const AddScreen({
     super.key,
@@ -40,6 +42,7 @@ class AddScreen extends StatelessWidget {
     required this.onSelectDatePressed,
     required this.transactionTextEditingController,
     required this.transactionValidator,
+    required this.onAddPressed,
   });
 
   @override
@@ -85,6 +88,9 @@ class AddScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              AddButton(
+                onPressed: onAddPressed,
               ),
             ],
           ),

@@ -78,6 +78,10 @@ class _AddViewModelState extends State<AddViewModel> {
     return null;
   }
 
+  void onAddPressed() {
+    Navigator.pop(context);
+  }
+
   @override
   void dispose() {
     dateTextEditingController.dispose();
@@ -105,6 +109,7 @@ class _AddViewModelState extends State<AddViewModel> {
       onSelectDatePressed: onSelectDatePressed,
       transactionTextEditingController: transactionTextEditingController,
       transactionValidator: transactionValidator,
+      onAddPressed: onAddPressed,
     );
   }
 }
