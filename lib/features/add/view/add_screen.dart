@@ -4,6 +4,7 @@ import 'package:kakeibo/features/add/widget/amount_card.dart';
 import 'package:kakeibo/features/add/widget/date_card.dart';
 import 'package:kakeibo/features/add/widget/main_category_card.dart';
 import 'package:kakeibo/features/add/widget/sub_category_card.dart';
+import 'package:kakeibo/features/add/widget/transaction_name_card.dart';
 
 class AddScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -17,8 +18,10 @@ class AddScreen extends StatelessWidget {
   final String selectedAccount;
   final List<String> accountList;
   final void Function(String?) onAccountChanged;
-  final TextEditingController textEditingController;
+  final TextEditingController dateTextEditingController;
   final void Function() onSelectDatePressed;
+  final TextEditingController transactionTextEditingController;
+  final String? Function(String?) transactionValidator;
 
   const AddScreen({
     super.key,
@@ -33,8 +36,10 @@ class AddScreen extends StatelessWidget {
     required this.selectedAccount,
     required this.accountList,
     required this.onAccountChanged,
-    required this.textEditingController,
+    required this.dateTextEditingController,
     required this.onSelectDatePressed,
+    required this.transactionTextEditingController,
+    required this.transactionValidator,
   });
 
   @override
@@ -46,6 +51,10 @@ class AddScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              TransactionNameCard(
+                controller: transactionTextEditingController,
+                validator: transactionValidator,
+              ),
               MainCategoryCard(
                 selectedIndex: selectedMainCategoryIndex,
                 onIncomeSelected: onIncomeSelected,
@@ -71,7 +80,7 @@ class AddScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: DateCard(
-                      controller: textEditingController,
+                      controller: dateTextEditingController,
                       onPressed: onSelectDatePressed,
                     ),
                   ),

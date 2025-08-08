@@ -50,7 +50,8 @@ class _AddViewModelState extends State<AddViewModel> {
     });
   }
 
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController dateTextEditingController =
+      TextEditingController();
 
   Future<void> onSelectDatePressed() async {
     DateTime now = DateTime.now();
@@ -63,9 +64,25 @@ class _AddViewModelState extends State<AddViewModel> {
 
     if (picked != null) {
       setState(() {
-        controller.text = dateFormat.format(picked);
+        dateTextEditingController.text = dateFormat.format(picked);
       });
     }
+  }
+
+  final TextEditingController transactionTextEditingController =
+      TextEditingController();
+  String? transactionValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return '取引名を入力してください';
+    }
+    return null;
+  }
+
+  @override
+  void dispose() {
+    dateTextEditingController.dispose();
+    transactionTextEditingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -84,8 +101,10 @@ class _AddViewModelState extends State<AddViewModel> {
       selectedAccount: selectedAccount,
       accountList: accountList,
       onAccountChanged: onAccountChanged,
-      textEditingController: controller,
+      dateTextEditingController: dateTextEditingController,
       onSelectDatePressed: onSelectDatePressed,
+      transactionTextEditingController: transactionTextEditingController,
+      transactionValidator: transactionValidator,
     );
   }
 }
