@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:kakeibo/core/constants/format.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
+import 'package:kakeibo/core/utils/get_amount_color.dart';
+import 'package:kakeibo/core/utils/get_amount_format.dart';
+import 'package:kakeibo/core/utils/get_category.dart';
+import 'package:kakeibo/core/utils/get_payment_category.dart';
 
 class TransactionCard extends StatelessWidget {
-  final String category;
-  final DateTime date;
-  final String paymentCategory;
-  final int value;
+  final TransactionModel transaction;
 
   const TransactionCard({
     super.key,
-    required this.category,
-    required this.date,
-    required this.paymentCategory,
-    required this.value,
+    required this.transaction,
   });
 
   @override
   Widget build(BuildContext context) {
-    final formatter = DateFormat('yy-MM-dd');
+    var strDate = dateFormat.format(transaction.date!);
 
-    var dateOnly = DateTime(date.year, date.month, date.day);
-    var strDate = formatter.format(dateOnly);
-
-    final numberFormatter = NumberFormat("#,###");
-    var result = numberFormatter.format(value);
-    var amount = "¥ $result";
+    var amount = getAmountFormat(transaction.value, transaction.categoryType);
+    var amountColor = getAmountColor(transaction.categoryType);
 
     return Card(
       child: Padding(
@@ -38,7 +33,12 @@ class TransactionCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Chip(
-                      label: Text(category),
+                      label: Text(
+                        getCategory(
+                          transaction.categoryType,
+                          transaction.category,
+                        ),
+                      ),
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       labelPadding: EdgeInsets.symmetric(horizontal: 1),
                       visualDensity: VisualDensity(
@@ -46,7 +46,9 @@ class TransactionCard extends StatelessWidget {
                         vertical: -4,
                       ),
                     ),
-                    Text('$strDate・$paymentCategory'),
+                    Text(
+                      '$strDate・${getPaymentCategory(transaction.paymentCategory)}',
+                    ),
                   ],
                 ),
                 Spacer(),
@@ -55,7 +57,7 @@ class TransactionCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: (value >= 0) ? Colors.green : Colors.red,
+                    color: amountColor,
                   ),
                 ),
               ],

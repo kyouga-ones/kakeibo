@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kakeibo/core/constants/list.dart';
 import 'package:kakeibo/features/home/view/home_screen.dart';
 
 class HomeViewModel extends StatefulWidget {
@@ -11,6 +12,8 @@ class HomeViewModel extends StatefulWidget {
 class _HomeViewModelState extends State<HomeViewModel> {
   @override
   Widget build(BuildContext context) {
-    return const HomeScreen();
+    return HomeScreen(
+      transactionModelList: transactionModelList,
+    );
   }
 }

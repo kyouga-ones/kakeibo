@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
-import 'package:kakeibo/core/utils/get_category.dart';
-import 'package:kakeibo/core/utils/get_payment_category.dart';
 import 'package:kakeibo/features/history/widget/history_card.dart';
 
 class HistoryListview extends StatelessWidget {
@@ -27,16 +25,7 @@ class HistoryListview extends StatelessWidget {
           // final index = entry.key;
 
           return HistoryCard(
-            categoryType: transactionData.category,
-            category: getCategory(
-              transactionData.categoryType,
-              transactionData.category,
-            ),
-            date: transactionData.date!,
-            paymentCategory: getPaymentCategory(
-              transactionData.paymentCategory,
-            ),
-            value: transactionData.value,
+            transaction: transactionData,
             onEditPuressed: onEditPuressed,
             onDeletePuressed: onDeletePuressed,
           );

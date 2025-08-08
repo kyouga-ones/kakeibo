@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/home/widget/balance_card.dart';
 import 'package:kakeibo/features/home/widget/home_card.dart';
 import 'package:kakeibo/features/home/widget/recent_transaction_card.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final List<TransactionModel> transactionModelList;
+
+  const HomeScreen({
+    super.key,
+    required this.transactionModelList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +59,9 @@ class HomeScreen extends StatelessWidget {
             Gap(8),
             BalanceCard(),
             Gap(8),
-            RecentTransactionCard(),
+            RecentTransactionCard(
+              transactionList: transactionModelList,
+            ),
           ],
         ),
       ),
