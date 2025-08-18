@@ -39,4 +39,18 @@ final List<TransactionModel> transactionModelList = [
     paymentCategory: 3,
     value: 100000,
   ),
+  TransactionModel(
+    categoryType: 2,
+    category: 1,
+    date: DateTime.now(),
+    paymentCategory: 2,
+    value: 500,
+  ),
+  TransactionModel(
+    categoryType: 2,
+    category: 2,
+    date: DateTime.now(),
+    paymentCategory: 2,
+    value: 1000,
+  ),
 ];
