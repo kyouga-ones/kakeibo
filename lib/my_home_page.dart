@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/models/screen.dart';
 import 'package:kakeibo/features/add/viewmodel/add_view_model.dart';
+import 'package:kakeibo/features/graph/viewmodel/graph_viewmodel.dart';
 import 'package:kakeibo/features/history/viewmodel/history_viewmodel.dart';
 import 'package:kakeibo/features/home/viewmodel/home_view_model.dart';
 
@@ -29,6 +30,12 @@ class _MyHomePageState extends State<MyHomePage> {
         icon: const Icon(Icons.toc),
         selectedIcon: const Icon(Icons.toc),
         screen: HistoryViewmodel(),
+      ),
+      Screen(
+        title: 'グラフ',
+        icon: const Icon(Icons.data_usage_outlined),
+        selectedIcon: const Icon(Icons.data_usage),
+        screen: GraphViewmodel(),
       ),
     ];
 
