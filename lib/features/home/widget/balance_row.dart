@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:intl/intl.dart';
+import 'package:kakeibo/core/utils/get_amount_format.dart';
 
 class BalanceRow extends StatelessWidget {
   final Color color;
@@ -18,9 +18,9 @@ class BalanceRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = NumberFormat("#,###");
-    var result = formatter.format(value);
-    var amount = "¥ $result";
+    var amount = (value >= 0)
+        ? getAmountFormat(value, 1)
+        : getAmountFormat(-value, 0);
 
     return Row(
       children: [

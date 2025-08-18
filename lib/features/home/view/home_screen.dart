@@ -7,10 +7,12 @@ import 'package:kakeibo/features/home/widget/recent_transaction_card.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<TransactionModel> transactionModelList;
+  final List<int> balanceList;
 
   const HomeScreen({
     super.key,
     required this.transactionModelList,
+    required this.balanceList,
   });
 
   @override
@@ -57,7 +59,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Gap(8),
-            BalanceCard(),
+            BalanceCard(balanceList: balanceList),
             Gap(8),
             RecentTransactionCard(
               transactionList: transactionModelList,
