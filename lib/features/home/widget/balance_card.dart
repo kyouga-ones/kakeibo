@@ -3,7 +3,12 @@ import 'package:gap/gap.dart';
 import 'package:kakeibo/features/home/widget/balance_row.dart';
 
 class BalanceCard extends StatelessWidget {
-  const BalanceCard({super.key});
+  final List<int> balanceList;
+
+  const BalanceCard({
+    super.key,
+    required this.balanceList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,26 +27,31 @@ class BalanceCard extends StatelessWidget {
               ],
             ),
             Gap(20),
-            BalanceRow(color: Colors.green, title: "現金", value: 0, tag: "cash"),
+            BalanceRow(
+              color: Colors.green,
+              title: "現金",
+              value: balanceList[0],
+              tag: "cash",
+            ),
             Gap(4),
             BalanceRow(
               color: Colors.blue,
               title: "メイン口座",
-              value: 200000,
+              value: balanceList[1],
               tag: "bank",
             ),
             Gap(4),
             BalanceRow(
               color: Colors.red,
               title: "クレジットカード",
-              value: -54100,
+              value: balanceList[2],
               tag: "credit",
             ),
             Gap(4),
             BalanceRow(
               color: Colors.purple,
               title: "証券口座",
-              value: 0,
+              value: balanceList[3],
               tag: "inverstment",
             ),
           ],

@@ -1,37 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:intl/intl.dart';
+import 'package:kakeibo/core/constants/format.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
+import 'package:kakeibo/core/utils/get_amount_color.dart';
+import 'package:kakeibo/core/utils/get_amount_format.dart';
+import 'package:kakeibo/core/utils/get_category.dart';
+import 'package:kakeibo/core/utils/get_payment_category.dart';
 
 class HistoryCard extends StatelessWidget {
-  final int categoryType;
-  final String category;
-  final DateTime date;
-  final String paymentCategory;
-  final int value;
+  final TransactionModel transaction;
   final void Function() onEditPuressed;
   final void Function() onDeletePuressed;
 
   const HistoryCard({
     super.key,
-    required this.categoryType,
-    required this.category,
-    required this.date,
-    required this.paymentCategory,
-    required this.value,
+    required this.transaction,
     required this.onEditPuressed,
     required this.onDeletePuressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    final formatter = DateFormat('yy-MM-dd');
-
-    var dateOnly = DateTime(date.year, date.month, date.day);
-    var strDate = formatter.format(dateOnly);
-
-    final numberFormatter = NumberFormat("#,###");
-    var result = numberFormatter.format(value);
-    var amount = (categoryType == 1) ? "-¥ $result" : "¥ $result";
+    var strDate = dateFormat.format(transaction.date!);
+    var amount = getAmountFormat(transaction.value, transaction.categoryType);
+    var amountColor = getAmountColor(transaction.categoryType);
 
     return Card(
       child: Padding(
@@ -45,7 +37,12 @@ class HistoryCard extends StatelessWidget {
                 Row(
                   children: [
                     Chip(
-                      label: Text(category),
+                      label: Text(
+                        getCategory(
+                          transaction.categoryType,
+                          transaction.category,
+                        ),
+                      ),
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       labelPadding: EdgeInsets.symmetric(horizontal: 1),
                       visualDensity: VisualDensity(
@@ -58,7 +55,7 @@ class HistoryCard extends StatelessWidget {
                   ],
                 ),
                 Gap(4),
-                Text(paymentCategory),
+                Text(getPaymentCategory(transaction.paymentCategory)),
               ],
             ),
             Spacer(),
@@ -67,7 +64,7 @@ class HistoryCard extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: (categoryType == 1) ? Colors.red : Colors.green,
+                color: amountColor,
               ),
             ),
             Gap(8),

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/home/widget/transaction_card.dart';
 
 class RecentTransactionCard extends StatelessWidget {
-  const RecentTransactionCard({super.key});
+  final List<TransactionModel> transactionList;
+
+  const RecentTransactionCard({
+    super.key,
+    required this.transactionList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,30 +28,39 @@ class RecentTransactionCard extends StatelessWidget {
               ],
             ),
             Gap(20),
-            TransactionCard(
-              category: "光熱費",
-              date: DateTime.now(),
-              paymentCategory: "クレジットカード",
-              value: -4000,
+            Wrap(
+              spacing: 2.0,
+              children: transactionList.map((transaction) {
+                return TransactionCard(
+                  transaction: transaction,
+                );
+              }).toList(),
             ),
-            TransactionCard(
-              category: "住居費",
-              date: DateTime.now(),
-              paymentCategory: "クレジットカード",
-              value: -50000,
-            ),
-            TransactionCard(
-              category: "食費",
-              date: DateTime.now(),
-              paymentCategory: "クレジットカード",
-              value: -100,
-            ),
-            TransactionCard(
-              category: "給与",
-              date: DateTime.now(),
-              paymentCategory: "メインバンク",
-              value: 200000,
-            ),
+
+            // TransactionCard(
+            //   category: "光熱費",
+            //   date: DateTime.now(),
+            //   paymentCategory: "クレジットカード",
+            //   value: -4000,
+            // ),
+            // TransactionCard(
+            //   category: "住居費",
+            //   date: DateTime.now(),
+            //   paymentCategory: "クレジットカード",
+            //   value: -50000,
+            // ),
+            // TransactionCard(
+            //   category: "食費",
+            //   date: DateTime.now(),
+            //   paymentCategory: "クレジットカード",
+            //   value: -100,
+            // ),
+            // TransactionCard(
+            //   category: "給与",
+            //   date: DateTime.now(),
+            //   paymentCategory: "メインバンク",
+            //   value: 200000,
+            // ),
           ],
         ),
       ),

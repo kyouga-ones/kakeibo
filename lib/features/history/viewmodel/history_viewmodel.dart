@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/constants/list.dart';
-import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/history/view/history_screen.dart';
 
 class HistoryViewmodel extends StatefulWidget {
@@ -44,29 +43,6 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
     selectedSort = sortList[0];
   }
 
-  final List<TransactionModel> transactionModelList = [
-    TransactionModel(
-      categoryType: 1,
-      category: 1,
-      date: DateTime.now(),
-      paymentCategory: 1,
-      value: 4000,
-    ),
-    TransactionModel(
-      categoryType: 2,
-      category: 1,
-      date: DateTime.now(),
-      paymentCategory: 2,
-      value: 1000,
-    ),
-    TransactionModel(
-      categoryType: 1,
-      category: 3,
-      date: DateTime.now(),
-      paymentCategory: 3,
-      value: 100000,
-    ),
-  ];
   void onEditPuressed() {}
   void onDeletePuressed() {}
 
