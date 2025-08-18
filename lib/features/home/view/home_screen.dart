@@ -6,11 +6,19 @@ import 'package:kakeibo/features/home/widget/home_card.dart';
 import 'package:kakeibo/features/home/widget/recent_transaction_card.dart';
 
 class HomeScreen extends StatelessWidget {
+  final int income;
+  final int expenditure;
+  final int balance;
+  final int totalAsets;
   final List<TransactionModel> transactionModelList;
   final List<int> balanceList;
 
   const HomeScreen({
     super.key,
+    required this.income,
+    required this.expenditure,
+    required this.balance,
+    required this.totalAsets,
     required this.transactionModelList,
     required this.balanceList,
   });
@@ -33,25 +41,25 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   HomeCard(
                     title: '今月の収入',
-                    value: 200000,
+                    value: income,
                     icon: Icons.trending_up,
                     color: Colors.green,
                   ),
                   HomeCard(
                     title: '今月の支出',
-                    value: 54100,
+                    value: expenditure,
                     icon: Icons.trending_down,
                     color: Colors.red,
                   ),
                   HomeCard(
                     title: '今月の収支',
-                    value: 145900,
+                    value: balance,
                     icon: Icons.bubble_chart,
                     color: Colors.blue,
                   ),
                   HomeCard(
                     title: '総資産',
-                    value: 145900,
+                    value: totalAsets,
                     icon: Icons.account_balance_wallet,
                     color: Colors.purple,
                   ),
