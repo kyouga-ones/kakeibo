@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/utils/get_category.dart';
 import 'package:kakeibo/features/graph/utils/get_pie_chart_color.dart';
+import 'package:kakeibo/features/graph/utils/get_proportion.dart';
 import 'package:kakeibo/features/graph/widget/category_card.dart';
 
 class DetailsListview extends StatelessWidget {
-  const DetailsListview({super.key});
+  final Map<int, double> categoryDetailsMap;
+  final int total;
+
+  const DetailsListview({
+    super.key,
+    required this.categoryDetailsMap,
+    required this.total,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,23 +20,16 @@ class DetailsListview extends StatelessWidget {
       height: 600,
       child: ListView(
         physics: NeverScrollableScrollPhysics(),
-        children: [
-          CategoryCard(
-            value: 10000,
-            title: getCategory(2, 1),
-            color: getPieChartColor(1),
-          ),
-          CategoryCard(
-            value: 5000,
-            title: getCategory(2, 2),
-            color: getPieChartColor(2),
-          ),
-          CategoryCard(
-            value: 500,
-            title: getCategory(2, 3),
-            color: getPieChartColor(3),
-          ),
-        ],
+        children: categoryDetailsMap.entries.map((entry) {
+          final category = entry.key;
+          final value = entry.value;
+          return CategoryCard(
+            value: value.round(),
+            title: getCategory(2, category),
+            color: getPieChartColor(category),
+            proportion: getProportion(value, total),
+          );
+        }).toList(),
       ),
     );
   }

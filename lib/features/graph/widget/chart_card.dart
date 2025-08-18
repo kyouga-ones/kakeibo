@@ -6,13 +6,15 @@ import 'package:kakeibo/features/graph/widget/details_listview.dart';
 import 'package:kakeibo/features/graph/widget/expenditure_chart.dart';
 
 class ChartCard extends StatelessWidget {
-  final Map<int, double> categoryDetailsLMap;
+  final Map<int, double> categoryDetailsMap;
   final List<SectorModel> sectors;
+  final int total;
 
   const ChartCard({
     super.key,
-    required this.categoryDetailsLMap,
+    required this.categoryDetailsMap,
     required this.sectors,
+    required this.total,
   });
 
   @override
@@ -42,13 +44,7 @@ class ChartCard extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        getAmountFormat(
-                          categoryDetailsLMap.values.fold(
-                            0,
-                            (sum, value) => sum + value.round(),
-                          ),
-                          1,
-                        ),
+                        getAmountFormat(total, 1),
                         style: TextStyle(fontSize: 20),
                       ),
                       Text('総支出'),
@@ -61,7 +57,10 @@ class ChartCard extends StatelessWidget {
                 'カテゴリ別詳細',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              DetailsListview(),
+              DetailsListview(
+                categoryDetailsMap: categoryDetailsMap,
+                total: total,
+              ),
             ],
           ),
         ),

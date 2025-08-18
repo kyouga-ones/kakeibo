@@ -6,12 +6,14 @@ class CategoryCard extends StatelessWidget {
   final int value;
   final String title;
   final Color color;
+  final double proportion;
 
   const CategoryCard({
     super.key,
     required this.value,
     required this.title,
     required this.color,
+    required this.proportion,
   });
 
   @override
@@ -29,6 +31,7 @@ class CategoryCard extends StatelessWidget {
             ),
             Spacer(),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   getAmountFormat(value, 1),
@@ -37,6 +40,7 @@ class CategoryCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                Text('${(proportion).toStringAsFixed(1)}%'),
               ],
             ),
           ],

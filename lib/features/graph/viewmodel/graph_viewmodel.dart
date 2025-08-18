@@ -21,34 +21,18 @@ class _GraphViewmodelState extends State<GraphViewmodel> {
     return map;
   });
 
-  // List<SectorModel> sectors = [
-  //   SectorModel(color: Color(0xFFE41A1C), value: 50),
-  //   SectorModel(color: Color(0xFF377EB8), value: 30),
-  //   SectorModel(color: Color(0xFF4DAF4A), value: 10),
-  //   SectorModel(color: Color(0xFFFF7F00), value: 5),
-  //   SectorModel(color: Color(0xFF984EA3), value: 3),
-  //   SectorModel(color: Color(0xFFFFE119), value: 2),
-  //   SectorModel(color: Color(0xFFA65628), value: 2),
-  //   SectorModel(color: Color(0xFFF781BF), value: 2),
-  //   SectorModel(color: Color(0xFF66C2A5), value: 2),
-  //   SectorModel(color: Color(0xFF999999), value: 2),
-  // ];
-
   late final sectors = result.entries
       .map((e) => SectorModel(color: getPieChartColor(e.key), value: e.value))
       .toList();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   list = <TransactionModel>[];
-  // }
+  late final total = result.values.fold(0, (sum, value) => sum + value.round());
 
   @override
   Widget build(BuildContext context) {
     return GraphScreen(
       categoryDetailsLMap: result,
       sectors: sectors,
+      total: total,
     );
   }
 }
