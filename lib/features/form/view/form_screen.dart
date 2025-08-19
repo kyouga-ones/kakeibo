@@ -54,52 +54,54 @@ class FormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(transaction == null ? '新規追加' : '編集')),
-      body: Form(
-        key: formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TransactionNameCard(
-                controller: transactionTextEditingController,
-                validator: transactionValidator,
-              ),
-              MainCategoryCard(
-                selectedIndex: selectedMainCategoryIndex,
-                onIncomeSelected: onIncomeSelected,
-                onExpenditureSelected: onExpenditureSelected,
-              ),
-              AmountCard(
-                initialValue: initialValue,
-                onChanged: onAmountChanged,
-              ),
-              SubCategoryCard(
-                selectedMainCategoryIndex: selectedMainCategoryIndex,
-                subCategoryList: subCategoryList,
-                selectedIndex: selectedSubCategoryIndex,
-                onSelected: onSubCategorySelected,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: AccountCard(
-                      selectedAccount: selectedAccount,
-                      accountMap: accountMap,
-                      onChanged: onAccountChanged,
+      body: SafeArea(
+        child: Form(
+          key: formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                TransactionNameCard(
+                  controller: transactionTextEditingController,
+                  validator: transactionValidator,
+                ),
+                MainCategoryCard(
+                  selectedIndex: selectedMainCategoryIndex,
+                  onIncomeSelected: onIncomeSelected,
+                  onExpenditureSelected: onExpenditureSelected,
+                ),
+                AmountCard(
+                  initialValue: initialValue,
+                  onChanged: onAmountChanged,
+                ),
+                SubCategoryCard(
+                  selectedMainCategoryIndex: selectedMainCategoryIndex,
+                  subCategoryList: subCategoryList,
+                  selectedIndex: selectedSubCategoryIndex,
+                  onSelected: onSubCategorySelected,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: AccountCard(
+                        selectedAccount: selectedAccount,
+                        accountMap: accountMap,
+                        onChanged: onAccountChanged,
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: DateCard(
-                      controller: dateTextEditingController,
-                      onPressed: onSelectDatePressed,
+                    Expanded(
+                      child: DateCard(
+                        controller: dateTextEditingController,
+                        onPressed: onSelectDatePressed,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              DecisionPressedButton(
-                transaction: transaction,
-                onPressed: onDecisionPressed,
-              ),
-            ],
+                  ],
+                ),
+                DecisionPressedButton(
+                  transaction: transaction,
+                  onPressed: onDecisionPressed,
+                ),
+              ],
+            ),
           ),
         ),
       ),
