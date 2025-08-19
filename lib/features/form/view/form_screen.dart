@@ -19,9 +19,9 @@ class FormScreen extends StatelessWidget {
   final List<String> subCategoryList;
   final int selectedSubCategoryIndex;
   final void Function(bool, int) onSubCategorySelected;
-  final String selectedAccount;
-  final List<String> accountList;
-  final void Function(String?) onAccountChanged;
+  final int selectedAccount;
+  final Map<int, String> accountMap;
+  final void Function(int?) onAccountChanged;
   final TextEditingController dateTextEditingController;
   final void Function() onSelectDatePressed;
   final TextEditingController transactionTextEditingController;
@@ -41,7 +41,7 @@ class FormScreen extends StatelessWidget {
     required this.selectedSubCategoryIndex,
     required this.onSubCategorySelected,
     required this.selectedAccount,
-    required this.accountList,
+    required this.accountMap,
     required this.onAccountChanged,
     required this.dateTextEditingController,
     required this.onSelectDatePressed,
@@ -83,7 +83,7 @@ class FormScreen extends StatelessWidget {
                   Expanded(
                     child: AccountCard(
                       selectedAccount: selectedAccount,
-                      accountList: accountList,
+                      accountMap: accountMap,
                       onChanged: onAccountChanged,
                     ),
                   ),

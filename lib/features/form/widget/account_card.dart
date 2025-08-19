@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AccountCard extends StatelessWidget {
-  final String selectedAccount;
-  final List<String> accountList;
-  final void Function(String?) onChanged;
+  final int selectedAccount;
+  final Map<int, String> accountMap;
+  final void Function(int?) onChanged;
 
   const AccountCard({
     super.key,
     required this.selectedAccount,
-    required this.accountList,
+    required this.accountMap,
     required this.onChanged,
   });
 
@@ -28,14 +28,14 @@ class AccountCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 12),
-            DropdownButton<String>(
+            DropdownButton<int>(
               isExpanded: true,
               value: selectedAccount,
               hint: Text('選択してください'),
-              items: accountList.map((account) {
-                return DropdownMenuItem(
-                  value: account,
-                  child: Text(account),
+              items: accountMap.entries.map((entry) {
+                return DropdownMenuItem<int>(
+                  value: entry.key,
+                  child: Text(entry.value),
                 );
               }).toList(),
               onChanged: onChanged,

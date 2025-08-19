@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/constants/format.dart';
 import 'package:kakeibo/core/constants/list.dart';
+import 'package:kakeibo/core/constants/map.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
-import 'package:kakeibo/core/utils/get_payment_category.dart';
 import 'package:kakeibo/features/form/view/form_screen.dart';
 
 class FormViewModel extends StatefulWidget {
@@ -49,9 +49,9 @@ class _FormViewModelState extends State<FormViewModel> {
     });
   }
 
-  var selectedAccount = '現金';
+  var selectedAccount = 1;
 
-  void onAccountChanged(String? value) {
+  void onAccountChanged(int? value) {
     setState(() {
       selectedAccount = value!;
     });
@@ -99,7 +99,7 @@ class _FormViewModelState extends State<FormViewModel> {
       selectedMainCategoryIndex = widget.transaction!.categoryType;
       amountValue = widget.transaction!.value.toString();
       selectedSubCategoryIndex = widget.transaction!.category;
-      selectedAccount = getPaymentCategory(widget.transaction!.paymentCategory);
+      selectedAccount = widget.transaction!.paymentCategory;
     }
   }
 
@@ -126,7 +126,7 @@ class _FormViewModelState extends State<FormViewModel> {
       selectedSubCategoryIndex: selectedSubCategoryIndex,
       onSubCategorySelected: onSubCategorySelected,
       selectedAccount: selectedAccount,
-      accountList: accountList,
+      accountMap: accountMap,
       onAccountChanged: onAccountChanged,
       dateTextEditingController: dateTextEditingController,
       onSelectDatePressed: onSelectDatePressed,

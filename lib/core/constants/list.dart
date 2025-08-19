@@ -15,8 +15,6 @@ const List<String> expenditureCategoryList = [
   'その他支出',
 ];
 
-const List<String> accountList = ['現金', 'メイン口座', 'クレジットカード', '証券口座'];
-
 final List<TransactionModel> transactionModelList = [
   TransactionModel(
     categoryType: 1,
