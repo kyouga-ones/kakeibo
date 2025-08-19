@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/models/screen.dart';
-import 'package:kakeibo/features/add/viewmodel/add_view_model.dart';
+import 'package:kakeibo/features/form/viewmodel/form_view_model.dart';
 import 'package:kakeibo/features/graph/viewmodel/graph_viewmodel.dart';
 import 'package:kakeibo/features/history/viewmodel/history_viewmodel.dart';
 import 'package:kakeibo/features/home/viewmodel/home_view_model.dart';
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const AddViewModel(),
+                  builder: (context) => const FormViewModel(),
                 ),
               );
             },

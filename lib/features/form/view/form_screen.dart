@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
-import 'package:kakeibo/features/add/widget/account_card.dart';
-import 'package:kakeibo/features/add/widget/add_button.dart';
-import 'package:kakeibo/features/add/widget/amount_card.dart';
-import 'package:kakeibo/features/add/widget/date_card.dart';
-import 'package:kakeibo/features/add/widget/main_category_card.dart';
-import 'package:kakeibo/features/add/widget/sub_category_card.dart';
-import 'package:kakeibo/features/add/widget/transaction_name_card.dart';
+import 'package:kakeibo/features/form/widget/account_card.dart';
+import 'package:kakeibo/features/form/widget/amount_card.dart';
+import 'package:kakeibo/features/form/widget/date_card.dart';
+import 'package:kakeibo/features/form/widget/decision_button.dart';
+import 'package:kakeibo/features/form/widget/main_category_card.dart';
+import 'package:kakeibo/features/form/widget/sub_category_card.dart';
+import 'package:kakeibo/features/form/widget/transaction_name_card.dart';
 
-class AddScreen extends StatelessWidget {
+class FormScreen extends StatelessWidget {
   final TransactionModel? transaction;
   final GlobalKey<FormState> formKey;
   final int selectedMainCategoryIndex;
@@ -26,9 +26,9 @@ class AddScreen extends StatelessWidget {
   final void Function() onSelectDatePressed;
   final TextEditingController transactionTextEditingController;
   final String? Function(String?) transactionValidator;
-  final void Function() onAddPressed;
+  final void Function() onDecisionPressed;
 
-  const AddScreen({
+  const FormScreen({
     super.key,
     this.transaction,
     required this.formKey,
@@ -47,7 +47,7 @@ class AddScreen extends StatelessWidget {
     required this.onSelectDatePressed,
     required this.transactionTextEditingController,
     required this.transactionValidator,
-    required this.onAddPressed,
+    required this.onDecisionPressed,
   });
 
   @override
@@ -95,9 +95,9 @@ class AddScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              AddButton(
+              DecisionPressedButton(
                 transaction: transaction,
-                onPressed: onAddPressed,
+                onPressed: onDecisionPressed,
               ),
             ],
           ),

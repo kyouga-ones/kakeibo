@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
 
-class AddButton extends StatelessWidget {
+class DecisionPressedButton extends StatelessWidget {
   final TransactionModel? transaction;
   final void Function() onPressed;
 
-  const AddButton({
+  const DecisionPressedButton({
     super.key,
     this.transaction,
     required this.onPressed,

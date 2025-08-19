@@ -3,21 +3,21 @@ import 'package:kakeibo/core/constants/format.dart';
 import 'package:kakeibo/core/constants/list.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/core/utils/get_payment_category.dart';
-import 'package:kakeibo/features/add/view/add_screen.dart';
+import 'package:kakeibo/features/form/view/form_screen.dart';
 
-class AddViewModel extends StatefulWidget {
+class FormViewModel extends StatefulWidget {
   final TransactionModel? transaction;
 
-  const AddViewModel({
+  const FormViewModel({
     super.key,
     this.transaction,
   });
 
   @override
-  State<AddViewModel> createState() => _AddViewModelState();
+  State<FormViewModel> createState() => _FormViewModelState();
 }
 
-class _AddViewModelState extends State<AddViewModel> {
+class _FormViewModelState extends State<FormViewModel> {
   final formKey = GlobalKey<FormState>();
 
   var selectedMainCategoryIndex = 1;
@@ -85,7 +85,7 @@ class _AddViewModelState extends State<AddViewModel> {
     return null;
   }
 
-  void onAddPressed() {
+  void onDecisionPressed() {
     Navigator.pop(context);
   }
 
@@ -112,7 +112,7 @@ class _AddViewModelState extends State<AddViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return AddScreen(
+    return FormScreen(
       transaction: widget.transaction,
       formKey: formKey,
       selectedMainCategoryIndex: selectedMainCategoryIndex,
@@ -132,7 +132,7 @@ class _AddViewModelState extends State<AddViewModel> {
       onSelectDatePressed: onSelectDatePressed,
       transactionTextEditingController: transactionTextEditingController,
       transactionValidator: transactionValidator,
-      onAddPressed: onAddPressed,
+      onDecisionPressed: onDecisionPressed,
     );
   }
 }

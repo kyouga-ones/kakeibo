@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/constants/list.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
-import 'package:kakeibo/features/add/viewmodel/add_view_model.dart';
+import 'package:kakeibo/features/form/viewmodel/form_view_model.dart';
 import 'package:kakeibo/features/history/view/history_screen.dart';
 
 class HistoryViewmodel extends StatefulWidget {
@@ -49,7 +49,7 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AddViewModel(transaction: transaction),
+        builder: (context) => FormViewModel(transaction: transaction),
       ),
     );
   }
