@@ -4,14 +4,14 @@ import 'package:kakeibo/features/history/widget/history_card.dart';
 
 class HistoryListview extends StatelessWidget {
   final List<TransactionModel> transactionModelList;
-  final void Function() onEditPuressed;
-  final void Function() onDeletePuressed;
+  final void Function(TransactionModel) onEditPressed;
+  final void Function() onDeletePressed;
 
   const HistoryListview({
     super.key,
     required this.transactionModelList,
-    required this.onEditPuressed,
-    required this.onDeletePuressed,
+    required this.onEditPressed,
+    required this.onDeletePressed,
   });
 
   @override
@@ -26,17 +26,9 @@ class HistoryListview extends StatelessWidget {
 
           return HistoryCard(
             transaction: transactionData,
-            onEditPuressed: onEditPuressed,
-            onDeletePuressed: onDeletePuressed,
+            onEditPressed: onEditPressed,
+            onDeletePressed: onDeletePressed,
           );
-          // return HistoryCard(
-          //   category: 'test',
-          //   date: transactionData.date!,
-          //   paymentCategory: 'test',
-          //   value: transactionData.value,
-          //   onEditPuressed: onEditPuressed,
-          //   onDeletePuressed: onDeletePuressed,
-          // );
         }).toList(),
       ),
     );

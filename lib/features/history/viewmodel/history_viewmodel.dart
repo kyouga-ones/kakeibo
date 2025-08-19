@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/constants/list.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
+import 'package:kakeibo/features/form/viewmodel/form_view_model.dart';
 import 'package:kakeibo/features/history/view/history_screen.dart';
 
 class HistoryViewmodel extends StatefulWidget {
@@ -43,8 +45,16 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
     selectedSort = sortList[0];
   }
 
-  void onEditPuressed() {}
-  void onDeletePuressed() {}
+  void onEditPressed(TransactionModel transaction) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FormViewModel(transaction: transaction),
+      ),
+    );
+  }
+
+  void onDeletePressed() {}
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +76,8 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
       selectedSort: selectedSort,
       onSortChanged: onSortChanged,
       transactionModelList: transactionModelList,
-      onEditPuressed: onEditPuressed,
-      onDeletePuressed: onDeletePuressed,
+      onEditPressed: onEditPressed,
+      onDeletePressed: onDeletePressed,
     );
   }
 }

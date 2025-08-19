@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/constants/format.dart';
 import 'package:kakeibo/core/constants/list.dart';
-import 'package:kakeibo/features/add/view/add_screen.dart';
+import 'package:kakeibo/core/constants/map.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
+import 'package:kakeibo/features/form/view/form_screen.dart';
 
-class AddViewModel extends StatefulWidget {
-  const AddViewModel({super.key});
+class FormViewModel extends StatefulWidget {
+  final TransactionModel? transaction;
+
+  const FormViewModel({
+    super.key,
+    this.transaction,
+  });
 
   @override
-  State<AddViewModel> createState() => _AddViewModelState();
+  State<FormViewModel> createState() => _FormViewModelState();
 }
 
-class _AddViewModelState extends State<AddViewModel> {
+class _FormViewModelState extends State<FormViewModel> {
   final formKey = GlobalKey<FormState>();
 
   var selectedMainCategoryIndex = 1;
@@ -42,9 +49,9 @@ class _AddViewModelState extends State<AddViewModel> {
     });
   }
 
-  var selectedAccount = '現金';
+  var selectedAccount = 1;
 
-  void onAccountChanged(String? value) {
+  void onAccountChanged(int? value) {
     setState(() {
       selectedAccount = value!;
     });
@@ -78,8 +85,22 @@ class _AddViewModelState extends State<AddViewModel> {
     return null;
   }
 
-  void onAddPressed() {
+  void onDecisionPressed() {
     Navigator.pop(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.transaction != null) {
+      dateTextEditingController.text = dateFormat.format(
+        widget.transaction!.date!,
+      );
+      selectedMainCategoryIndex = widget.transaction!.categoryType;
+      amountValue = widget.transaction!.value.toString();
+      selectedSubCategoryIndex = widget.transaction!.category;
+      selectedAccount = widget.transaction!.paymentCategory;
+    }
   }
 
   @override
@@ -91,11 +112,13 @@ class _AddViewModelState extends State<AddViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return AddScreen(
+    return FormScreen(
+      transaction: widget.transaction,
       formKey: formKey,
       selectedMainCategoryIndex: selectedMainCategoryIndex,
       onIncomeSelected: onIncomeSelected,
       onExpenditureSelected: onExpenditureSelected,
+      initialValue: amountValue,
       onAmountChanged: onAmountChanged,
       subCategoryList: selectedMainCategoryIndex == 1
           ? incomeCategoryList
@@ -103,13 +126,13 @@ class _AddViewModelState extends State<AddViewModel> {
       selectedSubCategoryIndex: selectedSubCategoryIndex,
       onSubCategorySelected: onSubCategorySelected,
       selectedAccount: selectedAccount,
-      accountList: accountList,
+      accountMap: accountMap,
       onAccountChanged: onAccountChanged,
       dateTextEditingController: dateTextEditingController,
       onSelectDatePressed: onSelectDatePressed,
       transactionTextEditingController: transactionTextEditingController,
       transactionValidator: transactionValidator,
-      onAddPressed: onAddPressed,
+      onDecisionPressed: onDecisionPressed,
     );
   }
 }
