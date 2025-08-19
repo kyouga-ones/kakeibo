@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/constants/list.dart';
+import 'package:kakeibo/core/database/delete.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/form/viewmodel/form_view_model.dart';
 import 'package:kakeibo/features/history/view/history_screen.dart';
@@ -52,7 +53,9 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
     );
   }
 
-  void onDeletePressed() {}
+  void onYesPressed(int index) {
+    delete(widget.db, index);
+  }
 
   @override
   initState() {
@@ -86,7 +89,7 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
       onSortChanged: onSortChanged,
       transactionModelMap: widget.transactionModelMap,
       onEditPressed: onEditPressed,
-      onDeletePressed: onDeletePressed,
+      onYesPressed: onYesPressed,
     );
   }
 }

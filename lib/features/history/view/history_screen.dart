@@ -15,7 +15,7 @@ class HistoryScreen extends StatelessWidget {
   final void Function(String?) onSortChanged;
   final Map<int, TransactionModel> transactionModelMap;
   final void Function(TransactionModel) onEditPressed;
-  final void Function() onDeletePressed;
+  final void Function(int) onYesPressed;
 
   const HistoryScreen({
     super.key,
@@ -30,7 +30,7 @@ class HistoryScreen extends StatelessWidget {
     required this.onSortChanged,
     required this.transactionModelMap,
     required this.onEditPressed,
-    required this.onDeletePressed,
+    required this.onYesPressed,
   });
 
   @override
@@ -56,7 +56,7 @@ class HistoryScreen extends StatelessWidget {
               HistoryListview(
                 transactionModelMap: transactionModelMap,
                 onEditPressed: onEditPressed,
-                onDeletePressed: onDeletePressed,
+                onYesPressed: onYesPressed,
               ),
             ],
           ),
