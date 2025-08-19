@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 
 class AmountCard extends StatelessWidget {
+  final String? initialValue;
   final void Function(String) onChanged;
 
   const AmountCard({
     super.key,
+    this.initialValue,
     required this.onChanged,
   });
 
@@ -36,6 +38,7 @@ class AmountCard extends StatelessWidget {
                 border: OutlineInputBorder(),
                 labelText: '金額を入力',
               ),
+              initialValue: initialValue,
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               validator: (value) {

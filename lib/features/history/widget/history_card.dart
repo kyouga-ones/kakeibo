@@ -9,14 +9,14 @@ import 'package:kakeibo/core/utils/get_payment_category.dart';
 
 class HistoryCard extends StatelessWidget {
   final TransactionModel transaction;
-  final void Function() onEditPuressed;
-  final void Function() onDeletePuressed;
+  final void Function(TransactionModel) onEditPressed;
+  final void Function() onDeletePressed;
 
   const HistoryCard({
     super.key,
     required this.transaction,
-    required this.onEditPuressed,
-    required this.onDeletePuressed,
+    required this.onEditPressed,
+    required this.onDeletePressed,
   });
 
   @override
@@ -77,7 +77,9 @@ class HistoryCard extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: IconButton(
-                    onPressed: onEditPuressed,
+                    onPressed: () {
+                      onEditPressed(transaction);
+                    },
                     icon: Icon(Icons.edit),
                   ),
                 ),
@@ -88,7 +90,7 @@ class HistoryCard extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: IconButton(
-                    onPressed: onDeletePuressed,
+                    onPressed: onDeletePressed,
                     icon: Icon(Icons.delete),
                     color: Colors.red,
                   ),

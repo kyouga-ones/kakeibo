@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/add/widget/account_card.dart';
 import 'package:kakeibo/features/add/widget/add_button.dart';
 import 'package:kakeibo/features/add/widget/amount_card.dart';
@@ -8,10 +9,12 @@ import 'package:kakeibo/features/add/widget/sub_category_card.dart';
 import 'package:kakeibo/features/add/widget/transaction_name_card.dart';
 
 class AddScreen extends StatelessWidget {
+  final TransactionModel? transaction;
   final GlobalKey<FormState> formKey;
   final int selectedMainCategoryIndex;
   final void Function(bool) onIncomeSelected;
   final void Function(bool) onExpenditureSelected;
+  final String? initialValue;
   final void Function(String) onAmountChanged;
   final List<String> subCategoryList;
   final int selectedSubCategoryIndex;
@@ -27,10 +30,12 @@ class AddScreen extends StatelessWidget {
 
   const AddScreen({
     super.key,
+    this.transaction,
     required this.formKey,
     required this.selectedMainCategoryIndex,
     required this.onIncomeSelected,
     required this.onExpenditureSelected,
+    this.initialValue,
     required this.onAmountChanged,
     required this.subCategoryList,
     required this.selectedSubCategoryIndex,
@@ -48,7 +53,7 @@ class AddScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('新しい取引を追加')),
+      appBar: AppBar(title: Text(transaction == null ? '新規追加' : '編集')),
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -64,6 +69,7 @@ class AddScreen extends StatelessWidget {
                 onExpenditureSelected: onExpenditureSelected,
               ),
               AmountCard(
+                initialValue: initialValue,
                 onChanged: onAmountChanged,
               ),
               SubCategoryCard(
@@ -90,6 +96,7 @@ class AddScreen extends StatelessWidget {
                 ],
               ),
               AddButton(
+                transaction: transaction,
                 onPressed: onAddPressed,
               ),
             ],

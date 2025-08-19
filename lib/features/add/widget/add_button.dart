@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
 
 class AddButton extends StatelessWidget {
+  final TransactionModel? transaction;
   final void Function() onPressed;
 
-  const AddButton({super.key, required this.onPressed});
+  const AddButton({
+    super.key,
+    this.transaction,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +19,7 @@ class AddButton extends StatelessWidget {
         width: double.infinity,
         child: OutlinedButton(
           onPressed: onPressed,
-          child: Text('追加'),
+          child: Text(transaction == null ? '追加' : '更新'),
         ),
       ),
     );

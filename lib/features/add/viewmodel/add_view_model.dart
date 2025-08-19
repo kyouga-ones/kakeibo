@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/constants/format.dart';
 import 'package:kakeibo/core/constants/list.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
+import 'package:kakeibo/core/utils/get_payment_category.dart';
 import 'package:kakeibo/features/add/view/add_screen.dart';
 
 class AddViewModel extends StatefulWidget {
-  const AddViewModel({super.key});
+  final TransactionModel? transaction;
+
+  const AddViewModel({
+    super.key,
+    this.transaction,
+  });
 
   @override
   State<AddViewModel> createState() => _AddViewModelState();
@@ -83,6 +90,20 @@ class _AddViewModelState extends State<AddViewModel> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.transaction != null) {
+      dateTextEditingController.text = dateFormat.format(
+        widget.transaction!.date!,
+      );
+      selectedMainCategoryIndex = widget.transaction!.categoryType;
+      amountValue = widget.transaction!.value.toString();
+      selectedSubCategoryIndex = widget.transaction!.category;
+      selectedAccount = getPaymentCategory(widget.transaction!.paymentCategory);
+    }
+  }
+
+  @override
   void dispose() {
     dateTextEditingController.dispose();
     transactionTextEditingController.dispose();
@@ -92,10 +113,12 @@ class _AddViewModelState extends State<AddViewModel> {
   @override
   Widget build(BuildContext context) {
     return AddScreen(
+      transaction: widget.transaction,
       formKey: formKey,
       selectedMainCategoryIndex: selectedMainCategoryIndex,
       onIncomeSelected: onIncomeSelected,
       onExpenditureSelected: onExpenditureSelected,
+      initialValue: amountValue,
       onAmountChanged: onAmountChanged,
       subCategoryList: selectedMainCategoryIndex == 1
           ? incomeCategoryList
