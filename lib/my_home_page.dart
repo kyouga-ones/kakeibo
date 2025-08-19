@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/core/models/screen.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/form/viewmodel/form_view_model.dart';
 import 'package:kakeibo/features/graph/viewmodel/graph_viewmodel.dart';
 import 'package:kakeibo/features/history/viewmodel/history_viewmodel.dart';
 import 'package:kakeibo/features/home/viewmodel/home_view_model.dart';
+import 'package:sqflite/sqflite.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  final Database db;
+  final Map<int, TransactionModel> transactionModelMap;
+  final List<TransactionModel> transactionModelList;
+
+  const MyHomePage({
+    super.key,
+    required this.db,
+    required this.transactionModelMap,
+    required this.transactionModelList,
+  });
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -23,19 +34,28 @@ class _MyHomePageState extends State<MyHomePage> {
         title: 'ホーム',
         icon: const Icon(Icons.home_outlined),
         selectedIcon: const Icon(Icons.home),
-        screen: HomeViewModel(),
+        screen: HomeViewModel(
+          db: widget.db,
+          transactionModelList: widget.transactionModelList,
+        ),
       ),
       Screen(
         title: '履歴',
         icon: const Icon(Icons.toc),
         selectedIcon: const Icon(Icons.toc),
-        screen: HistoryViewmodel(),
+        screen: HistoryViewmodel(
+          db: widget.db,
+          transactionModelMap: widget.transactionModelMap,
+        ),
       ),
       Screen(
         title: 'グラフ',
         icon: const Icon(Icons.data_usage_outlined),
         selectedIcon: const Icon(Icons.data_usage),
-        screen: GraphViewmodel(),
+        screen: GraphViewmodel(
+          db: widget.db,
+          transactionModelList: widget.transactionModelList,
+        ),
       ),
     ];
 
@@ -48,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const FormViewModel(),
+                  builder: (context) => FormViewModel(db: widget.db),
                 ),
               );
             },

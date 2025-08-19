@@ -1,40 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:kakeibo/core/constants/list.dart';
+import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/core/utils/sum_amount.dart';
 import 'package:kakeibo/core/utils/sum_balance_list.dart';
 import 'package:kakeibo/features/home/view/home_screen.dart';
+import 'package:sqflite/sqflite.dart';
 
 class HomeViewModel extends StatefulWidget {
-  const HomeViewModel({super.key});
+  final Database db;
+  final List<TransactionModel> transactionModelList;
+
+  const HomeViewModel({
+    super.key,
+    required this.db,
+    required this.transactionModelList,
+  });
 
   @override
   State<HomeViewModel> createState() => _HomeViewModelState();
 }
 
 class _HomeViewModelState extends State<HomeViewModel> {
-  var incomeList = transactionModelList
-      .where((i) => i.categoryType == 1)
-      .toList();
+  late List<TransactionModel> incomeList;
+  late List<TransactionModel> expenditureList;
+  late List<int> balanceList;
   int income = 0;
-
-  var expenditureList = transactionModelList
-      .where((i) => i.categoryType == 2)
-      .toList();
   int expenditure = 0;
 
   int balance = 0;
 
   int totalAsets = 0;
 
-  var balanceList = sumBalanceList(transactionModelList);
-
   @override
-  void initState() {
+  initState() {
     super.initState();
+
+    incomeList = widget.transactionModelList
+        .where((i) => i.categoryType == 1)
+        .toList();
+
+    expenditureList = widget.transactionModelList
+        .where((i) => i.categoryType == 2)
+        .toList();
+
+    balanceList = sumBalanceList(widget.transactionModelList);
+
     income = sumAmount(incomeList);
     expenditure = sumAmount(expenditureList);
     balance = income - expenditure;
     totalAsets = income - expenditure;
+
+    setState(() {});
   }
 
   @override
@@ -44,7 +59,7 @@ class _HomeViewModelState extends State<HomeViewModel> {
       expenditure: expenditure,
       balance: balance,
       totalAsets: totalAsets,
-      transactionModelList: transactionModelList,
+      transactionModelList: widget.transactionModelList,
       balanceList: balanceList,
     );
   }

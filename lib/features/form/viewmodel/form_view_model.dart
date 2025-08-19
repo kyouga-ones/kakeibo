@@ -2,14 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:kakeibo/core/constants/format.dart';
 import 'package:kakeibo/core/constants/list.dart';
 import 'package:kakeibo/core/constants/map.dart';
+import 'package:kakeibo/core/database/insert.dart';
+import 'package:kakeibo/core/database/update.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/form/view/form_screen.dart';
+import 'package:sqflite/sqflite.dart';
 
 class FormViewModel extends StatefulWidget {
+  final Database db;
+  final int? transactionId;
   final TransactionModel? transaction;
 
   const FormViewModel({
     super.key,
+    required this.db,
+    this.transactionId,
     this.transaction,
   });
 
@@ -20,11 +27,21 @@ class FormViewModel extends StatefulWidget {
 class _FormViewModelState extends State<FormViewModel> {
   final formKey = GlobalKey<FormState>();
 
+  var postData = TransactionModel(
+    categoryType: 1,
+    category: 1,
+    date: DateTime.now(),
+    paymentCategory: 1,
+    value: 0,
+  );
+
   var selectedMainCategoryIndex = 1;
   void onIncomeSelected(bool isSelected) {
     setState(() {
       selectedMainCategoryIndex = 1;
       selectedSubCategoryIndex = 0;
+      postData.categoryType = 1;
+      postData.category = 0;
     });
   }
 
@@ -32,6 +49,8 @@ class _FormViewModelState extends State<FormViewModel> {
     setState(() {
       selectedMainCategoryIndex = 2;
       selectedSubCategoryIndex = 0;
+      postData.categoryType = 2;
+      postData.category = 0;
     });
   }
 
@@ -39,6 +58,7 @@ class _FormViewModelState extends State<FormViewModel> {
 
   void onAmountChanged(String value) {
     amountValue = value;
+    postData.value = value != "" ? int.parse(value) : 0;
   }
 
   var selectedSubCategoryIndex = 0;
@@ -46,6 +66,7 @@ class _FormViewModelState extends State<FormViewModel> {
   void onSubCategorySelected(bool isSelected, int index) {
     setState(() {
       selectedSubCategoryIndex = index;
+      postData.category = index;
     });
   }
 
@@ -54,6 +75,7 @@ class _FormViewModelState extends State<FormViewModel> {
   void onAccountChanged(int? value) {
     setState(() {
       selectedAccount = value!;
+      postData.paymentCategory = value;
     });
   }
 
@@ -72,6 +94,7 @@ class _FormViewModelState extends State<FormViewModel> {
     if (picked != null) {
       setState(() {
         dateTextEditingController.text = dateFormat.format(picked);
+        postData.date = picked;
       });
     }
   }
@@ -85,13 +108,40 @@ class _FormViewModelState extends State<FormViewModel> {
     return null;
   }
 
-  void onDecisionPressed() {
+  int id = 0;
+
+  void onAddPressed() {
+    insert(
+      widget.db,
+      postData.categoryType,
+      postData.category,
+      postData.date,
+      postData.paymentCategory,
+      postData.value,
+    );
+    Navigator.pop(context);
+  }
+
+  void onUpdatePressed() {
+    update(
+      widget.db,
+      id,
+      postData.categoryType,
+      postData.category,
+      postData.date,
+      postData.paymentCategory,
+      postData.value,
+    );
     Navigator.pop(context);
   }
 
   @override
   void initState() {
     super.initState();
+    if (widget.transactionId != null) {
+      id = widget.transactionId!;
+    }
+
     if (widget.transaction != null) {
       dateTextEditingController.text = dateFormat.format(
         widget.transaction!.date!,
@@ -100,7 +150,10 @@ class _FormViewModelState extends State<FormViewModel> {
       amountValue = widget.transaction!.value.toString();
       selectedSubCategoryIndex = widget.transaction!.category;
       selectedAccount = widget.transaction!.paymentCategory;
+
+      postData = widget.transaction!;
     }
+    setState(() {});
   }
 
   @override
@@ -132,7 +185,8 @@ class _FormViewModelState extends State<FormViewModel> {
       onSelectDatePressed: onSelectDatePressed,
       transactionTextEditingController: transactionTextEditingController,
       transactionValidator: transactionValidator,
-      onDecisionPressed: onDecisionPressed,
+      onAddPressed: onAddPressed,
+      onUpdatePressed: onUpdatePressed,
     );
   }
 }

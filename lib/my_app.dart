@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:kakeibo/my_home_page.dart';
+import 'package:kakeibo/transaction_stream_builder.dart';
+import 'package:sqflite/sqflite.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Database db;
+
+  const MyApp({
+    super.key,
+    required this.db,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(),
+      home: TransactionStreamBuilder(db: db),
     );
   }
 }
