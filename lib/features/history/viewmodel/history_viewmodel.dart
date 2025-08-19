@@ -3,9 +3,17 @@ import 'package:kakeibo/core/constants/list.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/form/viewmodel/form_view_model.dart';
 import 'package:kakeibo/features/history/view/history_screen.dart';
+import 'package:sqflite/sqflite.dart';
 
 class HistoryViewmodel extends StatefulWidget {
-  const HistoryViewmodel({super.key});
+  final Database db;
+  final Map<int, TransactionModel> transactionModelMap;
+
+  const HistoryViewmodel({
+    super.key,
+    required this.db,
+    required this.transactionModelMap,
+  });
 
   @override
   State<HistoryViewmodel> createState() => _HistoryViewmodelState();
@@ -34,8 +42,20 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
     setState(() {});
   }
 
+  void onEditPressed(TransactionModel transaction) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            FormViewModel(db: widget.db, transaction: transaction),
+      ),
+    );
+  }
+
+  void onDeletePressed() {}
+
   @override
-  void initState() {
+  initState() {
     super.initState();
     subCategoryMap = {
       'すべて': ['すべて', ...incomeCategoryList, ...expenditureCategoryList],
@@ -44,17 +64,6 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
     };
     selectedSort = sortList[0];
   }
-
-  void onEditPressed(TransactionModel transaction) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => FormViewModel(transaction: transaction),
-      ),
-    );
-  }
-
-  void onDeletePressed() {}
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +84,7 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
       sortList: sortList,
       selectedSort: selectedSort,
       onSortChanged: onSortChanged,
-      transactionModelList: transactionModelList,
+      transactionModelMap: widget.transactionModelMap,
       onEditPressed: onEditPressed,
       onDeletePressed: onDeletePressed,
     );

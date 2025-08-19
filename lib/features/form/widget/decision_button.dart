@@ -3,12 +3,14 @@ import 'package:kakeibo/core/models/transaction_model.dart';
 
 class DecisionPressedButton extends StatelessWidget {
   final TransactionModel? transaction;
-  final void Function() onPressed;
+  final void Function() onAddPressed;
+  final void Function() onUpdatePressed;
 
   const DecisionPressedButton({
     super.key,
     this.transaction,
-    required this.onPressed,
+    required this.onAddPressed,
+    required this.onUpdatePressed,
   });
 
   @override
@@ -18,7 +20,7 @@ class DecisionPressedButton extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: OutlinedButton(
-          onPressed: onPressed,
+          onPressed: transaction == null ? onAddPressed : onUpdatePressed,
           child: Text(transaction == null ? '追加' : '更新'),
         ),
       ),

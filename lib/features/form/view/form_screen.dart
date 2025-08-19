@@ -26,7 +26,8 @@ class FormScreen extends StatelessWidget {
   final void Function() onSelectDatePressed;
   final TextEditingController transactionTextEditingController;
   final String? Function(String?) transactionValidator;
-  final void Function() onDecisionPressed;
+  final void Function() onAddPressed;
+  final void Function() onUpdatePressed;
 
   const FormScreen({
     super.key,
@@ -47,7 +48,8 @@ class FormScreen extends StatelessWidget {
     required this.onSelectDatePressed,
     required this.transactionTextEditingController,
     required this.transactionValidator,
-    required this.onDecisionPressed,
+    required this.onAddPressed,
+    required this.onUpdatePressed,
   });
 
   @override
@@ -98,7 +100,8 @@ class FormScreen extends StatelessWidget {
                 ),
                 DecisionPressedButton(
                   transaction: transaction,
-                  onPressed: onDecisionPressed,
+                  onAddPressed: onAddPressed,
+                  onUpdatePressed: onUpdatePressed,
                 ),
               ],
             ),
