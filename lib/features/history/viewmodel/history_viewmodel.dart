@@ -8,12 +8,12 @@ import 'package:sqflite/sqflite.dart';
 
 class HistoryViewmodel extends StatefulWidget {
   final Database db;
-  final Map<int, TransactionModel> transactionModelMap;
+  final List<TransactionModel> transactionModelList;
 
   const HistoryViewmodel({
     super.key,
     required this.db,
-    required this.transactionModelMap,
+    required this.transactionModelList,
   });
 
   @override
@@ -87,7 +87,7 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
       sortList: sortList,
       selectedSort: selectedSort,
       onSortChanged: onSortChanged,
-      transactionModelMap: widget.transactionModelMap,
+      transactionModelList: widget.transactionModelList,
       onEditPressed: onEditPressed,
       onYesPressed: onYesPressed,
     );

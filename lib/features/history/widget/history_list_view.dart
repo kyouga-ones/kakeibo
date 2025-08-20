@@ -4,13 +4,13 @@ import 'package:kakeibo/features/history/widget/delete_dialog.dart';
 import 'package:kakeibo/features/history/widget/history_card.dart';
 
 class HistoryListview extends StatelessWidget {
-  final Map<int, TransactionModel> transactionModelMap;
+  final List<TransactionModel> transactionModelList;
   final void Function(TransactionModel) onEditPressed;
   final void Function(int) onYesPressed;
 
   const HistoryListview({
     super.key,
-    required this.transactionModelMap,
+    required this.transactionModelList,
     required this.onEditPressed,
     required this.onYesPressed,
   });
@@ -21,7 +21,7 @@ class HistoryListview extends StatelessWidget {
       height: 600,
       child: ListView(
         shrinkWrap: true,
-        children: transactionModelMap.entries.map((entry) {
+        children: transactionModelList.asMap().entries.map((entry) {
           final transactionData = entry.value;
           final index = entry.key;
 

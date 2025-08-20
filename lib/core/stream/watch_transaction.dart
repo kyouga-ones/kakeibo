@@ -4,8 +4,8 @@ import 'package:sqflite/sqflite.dart';
 
 Stream<List<TransactionModel>> watchTransactions(Database db) async* {
   while (true) {
-    var map = await select(db);
-    yield map.values.toList();
+    var list = await select(db);
+    yield list;
     await Future.delayed(Duration(seconds: 2));
   }
 }
