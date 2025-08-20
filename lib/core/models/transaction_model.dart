@@ -1,4 +1,5 @@
 class TransactionModel {
+  int? id;
   int categoryType = 0;
   int category = 0;
   DateTime? date;
@@ -6,6 +7,7 @@ class TransactionModel {
   int value = 0;
 
   TransactionModel({
+    this.id,
     required this.categoryType,
     required this.category,
     required this.date,

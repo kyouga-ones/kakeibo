@@ -9,13 +9,11 @@ import 'package:sqflite/sqflite.dart';
 
 class MyHomePage extends StatefulWidget {
   final Database db;
-  final Map<int, TransactionModel> transactionModelMap;
   final List<TransactionModel> transactionModelList;
 
   const MyHomePage({
     super.key,
     required this.db,
-    required this.transactionModelMap,
     required this.transactionModelList,
   });
 
@@ -45,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedIcon: const Icon(Icons.toc),
         screen: HistoryViewmodel(
           db: widget.db,
-          transactionModelMap: widget.transactionModelMap,
+          transactionModelList: widget.transactionModelList,
         ),
       ),
       Screen(
