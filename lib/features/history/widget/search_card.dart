@@ -33,6 +33,7 @@ class SearchCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
+              textInputAction: TextInputAction.search,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'テキストフィールド',

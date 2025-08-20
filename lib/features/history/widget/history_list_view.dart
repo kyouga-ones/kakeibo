@@ -17,8 +17,7 @@ class HistoryListview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 600,
+    return Expanded(
       child: ListView(
         shrinkWrap: true,
         children: transactionModelList.asMap().entries.map((entry) {
