@@ -10,8 +10,8 @@ class HomeScreen extends StatelessWidget {
   final int expenditure;
   final int balance;
   final int totalAsets;
-  final List<TransactionModel> transactionModelList;
   final List<int> balanceList;
+  final List<TransactionModel> recentTransactionList;
 
   const HomeScreen({
     super.key,
@@ -19,8 +19,8 @@ class HomeScreen extends StatelessWidget {
     required this.expenditure,
     required this.balance,
     required this.totalAsets,
-    required this.transactionModelList,
     required this.balanceList,
+    required this.recentTransactionList,
   });
 
   @override
@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
             BalanceCard(balanceList: balanceList),
             Gap(8),
             RecentTransactionCard(
-              transactionList: transactionModelList,
+              recentTransactionList: recentTransactionList,
             ),
           ],
         ),

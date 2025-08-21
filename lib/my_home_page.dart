@@ -3,7 +3,7 @@ import 'package:kakeibo/core/models/screen.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/form/viewmodel/form_view_model.dart';
 import 'package:kakeibo/features/graph/viewmodel/graph_viewmodel.dart';
-import 'package:kakeibo/features/history/viewmodel/history_viewmodel.dart';
+import 'package:kakeibo/features/history/viewmodel/history_view_model.dart';
 import 'package:kakeibo/features/home/viewmodel/home_view_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: '履歴',
         icon: const Icon(Icons.toc),
         selectedIcon: const Icon(Icons.toc),
-        screen: HistoryViewmodel(
+        screen: HistoryViewModel(
           db: widget.db,
           transactionModelList: widget.transactionModelList,
         ),

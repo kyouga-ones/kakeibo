@@ -38,28 +38,26 @@ class HistoryScreen extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: EdgeInsetsGeometry.all(8),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SearchCard(
-                mainCategoryList: mainCategoryList,
-                selectedMainCategory: selectedMainCategory,
-                onMainCategoryChanged: onMainCategoryChanged,
-                subCategoryMap: subCategoryMap,
-                selectedSubCategory: selectedSubCategory,
-                onSubCategoryChanged: onSubCategoryChanged,
-                sortList: sortList,
-                selectedSort: selectedSort,
-                onSortChanged: onSortChanged,
-              ),
-              HistoryListview(
-                transactionModelList: transactionModelList,
-                onEditPressed: onEditPressed,
-                onYesPressed: onYesPressed,
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SearchCard(
+              mainCategoryList: mainCategoryList,
+              selectedMainCategory: selectedMainCategory,
+              onMainCategoryChanged: onMainCategoryChanged,
+              subCategoryMap: subCategoryMap,
+              selectedSubCategory: selectedSubCategory,
+              onSubCategoryChanged: onSubCategoryChanged,
+              sortList: sortList,
+              selectedSort: selectedSort,
+              onSortChanged: onSortChanged,
+            ),
+            HistoryListview(
+              transactionModelList: transactionModelList,
+              onEditPressed: onEditPressed,
+              onYesPressed: onYesPressed,
+            ),
+          ],
         ),
       ),
     );

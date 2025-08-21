@@ -4,6 +4,7 @@ import 'package:kakeibo/core/constants/list.dart';
 import 'package:kakeibo/core/constants/map.dart';
 import 'package:kakeibo/core/database/insert.dart';
 import 'package:kakeibo/core/database/update.dart';
+import 'package:kakeibo/core/models/transaction_form_morel.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/form/view/form_screen.dart';
 import 'package:sqflite/sqflite.dart';
@@ -27,12 +28,11 @@ class FormViewModel extends StatefulWidget {
 class _FormViewModelState extends State<FormViewModel> {
   final formKey = GlobalKey<FormState>();
 
-  var postData = TransactionModel(
+  var postData = TransactionFormModel(
     categoryType: 1,
-    category: 1,
+    category: 0,
     date: DateTime.now(),
     paymentCategory: 1,
-    value: 0,
   );
 
   var selectedMainCategoryIndex = 1;
@@ -57,8 +57,10 @@ class _FormViewModelState extends State<FormViewModel> {
   String? amountValue;
 
   void onAmountChanged(String value) {
-    amountValue = value;
-    postData.value = value != "" ? int.parse(value) : 0;
+    setState(() {
+      amountValue = value;
+      postData.value = value != "" ? int.parse(value) : null;
+    });
   }
 
   var selectedSubCategoryIndex = 0;
@@ -79,14 +81,14 @@ class _FormViewModelState extends State<FormViewModel> {
     });
   }
 
-  final TextEditingController dateTextEditingController =
-      TextEditingController();
+  TextEditingController dateTextEditingController = TextEditingController(
+    text: dateFormat.format(DateTime.now()),
+  );
 
   Future<void> onSelectDatePressed() async {
-    DateTime now = DateTime.now();
     DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: now,
+      initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
@@ -97,6 +99,16 @@ class _FormViewModelState extends State<FormViewModel> {
         postData.date = picked;
       });
     }
+  }
+
+  void onDateChanged(String str) {
+    setState(() {
+      try {
+        postData.date = dateFormat.parse(dateTextEditingController.text);
+      } catch (_) {
+        postData.date = null;
+      }
+    });
   }
 
   final TextEditingController transactionTextEditingController =
@@ -115,9 +127,9 @@ class _FormViewModelState extends State<FormViewModel> {
       widget.db,
       postData.categoryType,
       postData.category,
-      postData.date,
+      postData.date!,
       postData.paymentCategory,
-      postData.value,
+      postData.value!,
     );
     Navigator.pop(context);
   }
@@ -128,9 +140,9 @@ class _FormViewModelState extends State<FormViewModel> {
       id,
       postData.categoryType,
       postData.category,
-      postData.date,
+      postData.date!,
       postData.paymentCategory,
-      postData.value,
+      postData.value!,
     );
     Navigator.pop(context);
   }
@@ -151,8 +163,15 @@ class _FormViewModelState extends State<FormViewModel> {
       selectedSubCategoryIndex = widget.transaction!.category;
       selectedAccount = widget.transaction!.paymentCategory;
 
-      postData = widget.transaction!;
+      postData = TransactionFormModel(
+        categoryType: widget.transaction!.categoryType,
+        category: widget.transaction!.category,
+        paymentCategory: widget.transaction!.paymentCategory,
+        date: widget.transaction!.date,
+        value: widget.transaction!.value,
+      );
     }
+
     setState(() {});
   }
 
@@ -168,6 +187,7 @@ class _FormViewModelState extends State<FormViewModel> {
     return FormScreen(
       transaction: widget.transaction,
       formKey: formKey,
+      postData: postData,
       selectedMainCategoryIndex: selectedMainCategoryIndex,
       onIncomeSelected: onIncomeSelected,
       onExpenditureSelected: onExpenditureSelected,
@@ -183,6 +203,7 @@ class _FormViewModelState extends State<FormViewModel> {
       onAccountChanged: onAccountChanged,
       dateTextEditingController: dateTextEditingController,
       onSelectDatePressed: onSelectDatePressed,
+      onDateChanged: onDateChanged,
       transactionTextEditingController: transactionTextEditingController,
       transactionValidator: transactionValidator,
       onAddPressed: onAddPressed,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kakeibo/core/models/transaction_form_morel.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/form/widget/account_card.dart';
 import 'package:kakeibo/features/form/widget/amount_card.dart';
@@ -11,6 +12,7 @@ import 'package:kakeibo/features/form/widget/transaction_name_card.dart';
 class FormScreen extends StatelessWidget {
   final TransactionModel? transaction;
   final GlobalKey<FormState> formKey;
+  final TransactionFormModel postData;
   final int selectedMainCategoryIndex;
   final void Function(bool) onIncomeSelected;
   final void Function(bool) onExpenditureSelected;
@@ -24,15 +26,17 @@ class FormScreen extends StatelessWidget {
   final void Function(int?) onAccountChanged;
   final TextEditingController dateTextEditingController;
   final void Function() onSelectDatePressed;
+  final void Function(String) onDateChanged;
   final TextEditingController transactionTextEditingController;
   final String? Function(String?) transactionValidator;
-  final void Function() onAddPressed;
-  final void Function() onUpdatePressed;
+  final void Function()? onAddPressed;
+  final void Function()? onUpdatePressed;
 
   const FormScreen({
     super.key,
     this.transaction,
     required this.formKey,
+    required this.postData,
     required this.selectedMainCategoryIndex,
     required this.onIncomeSelected,
     required this.onExpenditureSelected,
@@ -46,6 +50,7 @@ class FormScreen extends StatelessWidget {
     required this.onAccountChanged,
     required this.dateTextEditingController,
     required this.onSelectDatePressed,
+    required this.onDateChanged,
     required this.transactionTextEditingController,
     required this.transactionValidator,
     required this.onAddPressed,
@@ -94,14 +99,24 @@ class FormScreen extends StatelessWidget {
                       child: DateCard(
                         controller: dateTextEditingController,
                         onPressed: onSelectDatePressed,
+                        onDateChanged: onDateChanged,
                       ),
                     ),
                   ],
                 ),
                 DecisionPressedButton(
                   transaction: transaction,
-                  onAddPressed: onAddPressed,
-                  onUpdatePressed: onUpdatePressed,
+                  postData: postData,
+                  onAddPressed:
+                      (postData.date != null && postData.value != null)
+                      ? onAddPressed
+                      : null,
+                  onUpdatePressed:
+                      (postData.date != null &&
+                          dateTextEditingController.text != "" &&
+                          postData.value != null)
+                      ? onUpdatePressed
+                      : null,
                 ),
               ],
             ),

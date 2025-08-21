@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:kakeibo/core/models/sector_model.dart';
 import 'package:kakeibo/core/utils/get_amount_format.dart';
-import 'package:kakeibo/features/graph/widget/details_listview.dart';
+import 'package:kakeibo/features/graph/widget/details_list_view.dart';
 import 'package:kakeibo/features/graph/widget/expenditure_chart.dart';
 
 class ChartCard extends StatelessWidget {
@@ -57,7 +57,7 @@ class ChartCard extends StatelessWidget {
                 'カテゴリ別詳細',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              DetailsListview(
+              DetailsListView(
                 categoryDetailsMap: categoryDetailsMap,
                 total: total,
               ),

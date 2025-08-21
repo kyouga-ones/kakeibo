@@ -4,11 +4,11 @@ import 'package:kakeibo/core/models/transaction_model.dart';
 import 'package:kakeibo/features/home/widget/transaction_card.dart';
 
 class RecentTransactionCard extends StatelessWidget {
-  final List<TransactionModel> transactionList;
+  final List<TransactionModel> recentTransactionList;
 
   const RecentTransactionCard({
     super.key,
-    required this.transactionList,
+    required this.recentTransactionList,
   });
 
   @override
@@ -30,37 +30,12 @@ class RecentTransactionCard extends StatelessWidget {
             Gap(20),
             Wrap(
               spacing: 2.0,
-              children: transactionList.map((transaction) {
+              children: recentTransactionList.map((transaction) {
                 return TransactionCard(
                   transaction: transaction,
                 );
               }).toList(),
             ),
-
-            // TransactionCard(
-            //   category: "光熱費",
-            //   date: DateTime.now(),
-            //   paymentCategory: "クレジットカード",
-            //   value: -4000,
-            // ),
-            // TransactionCard(
-            //   category: "住居費",
-            //   date: DateTime.now(),
-            //   paymentCategory: "クレジットカード",
-            //   value: -50000,
-            // ),
-            // TransactionCard(
-            //   category: "食費",
-            //   date: DateTime.now(),
-            //   paymentCategory: "クレジットカード",
-            //   value: -100,
-            // ),
-            // TransactionCard(
-            //   category: "給与",
-            //   date: DateTime.now(),
-            //   paymentCategory: "メインバンク",
-            //   value: 200000,
-            // ),
           ],
         ),
       ),

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class DeleteDialog extends StatelessWidget {
   final void Function(int) onYesPressed;
-  final int index;
+  final int id;
 
   const DeleteDialog({
     super.key,
     required this.onYesPressed,
-    required this.index,
+    required this.id,
   });
 
   @override
@@ -36,7 +36,7 @@ class DeleteDialog extends StatelessWidget {
                 foregroundColor: Theme.of(context).colorScheme.error,
               ),
               onPressed: () {
-                onYesPressed(index);
+                onYesPressed(id);
                 Navigator.pop(context);
               },
               child: const Text('はい'),

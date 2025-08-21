@@ -17,13 +17,11 @@ class HistoryListview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 600,
+    return Expanded(
       child: ListView(
         shrinkWrap: true,
         children: transactionModelList.asMap().entries.map((entry) {
           final transactionData = entry.value;
-          final index = entry.key;
 
           return HistoryCard(
             transaction: transactionData,
@@ -33,8 +31,8 @@ class HistoryListview extends StatelessWidget {
                 context: context,
                 builder: (context) {
                   return DeleteDialog(
-                    index: index,
                     onYesPressed: onYesPressed,
+                    id: transactionData.id!,
                   );
                 },
               );

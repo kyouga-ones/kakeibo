@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class DateCard extends StatelessWidget {
   final TextEditingController controller;
   final void Function() onPressed;
+  final void Function(String) onDateChanged;
 
   const DateCard({
     super.key,
     required this.controller,
     required this.onPressed,
+    required this.onDateChanged,
   });
 
   @override
@@ -26,7 +28,7 @@ class DateCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 12),
-            TextField(
+            TextFormField(
               controller: controller,
               decoration: InputDecoration(
                 hintText: 'yyyy/mm/dd',
@@ -36,7 +38,15 @@ class DateCard extends StatelessWidget {
                 ),
                 border: OutlineInputBorder(),
               ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '日付を入力してください';
+                }
+                return null;
+              },
+              onChanged: onDateChanged,
               keyboardType: TextInputType.datetime,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
           ],
         ),

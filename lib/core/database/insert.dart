@@ -5,7 +5,7 @@ Future insert(
   Database db,
   int categoryType,
   int category,
-  DateTime? date,
+  DateTime date,
   int paymentCategory,
   int value,
 ) async {

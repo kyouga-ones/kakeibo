@@ -6,21 +6,21 @@ import 'package:kakeibo/features/form/viewmodel/form_view_model.dart';
 import 'package:kakeibo/features/history/view/history_screen.dart';
 import 'package:sqflite/sqflite.dart';
 
-class HistoryViewmodel extends StatefulWidget {
+class HistoryViewModel extends StatefulWidget {
   final Database db;
   final List<TransactionModel> transactionModelList;
 
-  const HistoryViewmodel({
+  const HistoryViewModel({
     super.key,
     required this.db,
     required this.transactionModelList,
   });
 
   @override
-  State<HistoryViewmodel> createState() => _HistoryViewmodelState();
+  State<HistoryViewModel> createState() => _HistoryViewModelState();
 }
 
-class _HistoryViewmodelState extends State<HistoryViewmodel> {
+class _HistoryViewModelState extends State<HistoryViewModel> {
   final List<String> mainCategoryList = ['すべて', '収入', '支出'];
   String? selectedMainCategory = 'すべて';
   void onMainCategoryChanged(String? value) {
@@ -47,14 +47,17 @@ class _HistoryViewmodelState extends State<HistoryViewmodel> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            FormViewModel(db: widget.db, transaction: transaction),
+        builder: (context) => FormViewModel(
+          db: widget.db,
+          transactionId: transaction.id,
+          transaction: transaction,
+        ),
       ),
     );
   }
 
-  void onYesPressed(int index) {
-    delete(widget.db, index);
+  void onYesPressed(int id) {
+    delete(widget.db, id);
   }
 
   @override

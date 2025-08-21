@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:kakeibo/core/models/transaction_form_morel.dart';
 import 'package:kakeibo/core/models/transaction_model.dart';
 
 class DecisionPressedButton extends StatelessWidget {
   final TransactionModel? transaction;
-  final void Function() onAddPressed;
-  final void Function() onUpdatePressed;
+  final TransactionFormModel postData;
+  final void Function()? onAddPressed;
+  final void Function()? onUpdatePressed;
 
   const DecisionPressedButton({
     super.key,
     this.transaction,
+    required this.postData,
     required this.onAddPressed,
     required this.onUpdatePressed,
   });
