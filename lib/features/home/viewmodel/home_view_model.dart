@@ -30,6 +30,8 @@ class _HomeViewModelState extends State<HomeViewModel> {
 
   int totalAsets = 0;
 
+  List<TransactionModel> recentTransactionList = [];
+
   @override
   initState() {
     super.initState();
@@ -49,6 +51,11 @@ class _HomeViewModelState extends State<HomeViewModel> {
     balance = income - expenditure;
     totalAsets = income - expenditure;
 
+    recentTransactionList = widget.transactionModelList.reversed
+        .toList()
+        .take(5)
+        .toList();
+
     setState(() {});
   }
 
@@ -59,8 +66,8 @@ class _HomeViewModelState extends State<HomeViewModel> {
       expenditure: expenditure,
       balance: balance,
       totalAsets: totalAsets,
-      transactionModelList: widget.transactionModelList,
       balanceList: balanceList,
+      recentTransactionList: recentTransactionList,
     );
   }
 }
