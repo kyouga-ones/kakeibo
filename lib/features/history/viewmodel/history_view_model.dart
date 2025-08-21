@@ -56,8 +56,8 @@ class _HistoryViewModelState extends State<HistoryViewModel> {
     );
   }
 
-  void onYesPressed(int index) {
-    delete(widget.db, index);
+  void onYesPressed(int id) {
+    delete(widget.db, id);
   }
 
   @override

@@ -6,6 +6,6 @@ Stream<List<TransactionModel>> watchTransactions(Database db) async* {
   while (true) {
     var list = await select(db);
     yield list;
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
   }
 }
