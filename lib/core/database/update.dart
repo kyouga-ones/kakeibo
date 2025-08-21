@@ -5,7 +5,7 @@ Future update(
   int id,
   int categoryType,
   int category,
-  DateTime? date,
+  DateTime date,
   int paymentCategory,
   int value,
 ) {

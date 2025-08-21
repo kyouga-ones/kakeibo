@@ -49,6 +49,7 @@ class AmountCard extends StatelessWidget {
               },
               textInputAction: TextInputAction.done,
               onChanged: onChanged,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
           ),
           Gap(8),
