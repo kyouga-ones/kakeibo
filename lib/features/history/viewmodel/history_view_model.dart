@@ -47,8 +47,11 @@ class _HistoryViewModelState extends State<HistoryViewModel> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            FormViewModel(db: widget.db, transaction: transaction),
+        builder: (context) => FormViewModel(
+          db: widget.db,
+          transactionId: transaction.id,
+          transaction: transaction,
+        ),
       ),
     );
   }

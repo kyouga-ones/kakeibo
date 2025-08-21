@@ -139,6 +139,7 @@ class _FormViewModelState extends State<FormViewModel> {
   void initState() {
     super.initState();
     if (widget.transactionId != null) {
+      print(widget.transactionId);
       id = widget.transactionId!;
     }
 
